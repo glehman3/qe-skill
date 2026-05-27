@@ -2,13 +2,13 @@
 
 **Quick Setup for QualityForge commands (`/qforge`, `/testjam`)**
 
-This guide is for users who **already have CODEGEN CLI installed** and just need to set up MCP servers.
+This guide helps you configure the MCP servers required by QualityForge in Cursor.
 
 ---
 
 ## ☁️ Already Have Cloud Workspace?
 
-**If you already have Cloud Workspace set up, you do NOT need CODEGEN CLI!**
+**If you already have Cloud Workspace set up, you may not need manual MCP configuration!**
 
 Simply:
 1. Open Cursor **Settings → Tools & MCP's**
@@ -17,11 +17,11 @@ Simply:
 
 ---
 
-**👋 First Time User?** Never installed Cursor or CODEGEN? → See [FIRST-TIME-SETUP.md](./FIRST-TIME-SETUP.md) for complete installation from scratch.
+**👋 First Time User?** Never installed Cursor or MCPs? → See [FIRST-TIME-SETUP.md](./FIRST-TIME-SETUP.md) for complete installation from scratch.
 
 ---
 
-This guide will help you set up the required MCP servers in 3 simple steps (assuming CODEGEN CLI is already installed).
+This guide will help you set up the required MCP servers in Cursor.
 
 ---
 
@@ -58,42 +58,32 @@ The Test Jam Generator needs GitHub MCP to:
    - Look for MCP Servers section
    - Verify "github-mcp" is listed
 
-2. **If not configured**, install GitHub MCP using CODEGEN:
+2. **If not configured**, add GitHub MCP to Cursor:
 
-   **Prerequisites** (must have CODEGEN CLI and eiamCli installed):
-   ```bash
-   # Verify CODEGEN is installed
-   codegen --version
-   
-   # Verify eiamCli is installed (required for authentication)
-   eiamcli --version
-   ```
-   
-   **If CODEGEN is NOT installed** → See [FIRST-TIME-SETUP.md](./FIRST-TIME-SETUP.md) for complete installation.
-   
-   **If eiamCli is NOT installed** → Install it first:
-   ```bash
-   # Add the company EIAM Homebrew tap
-   brew tap org/authcli git@github.com:EIAM/eiamCli-golang.git
-   
-   # Install eiamCli
-   brew install eiamCli
-   ```
-
-   **Install GitHub MCP**:
-   ```bash
-   # Run the installation command (eiamCli will open browser for auth)
-   codegen mcp install github-mcp:latest
-   ```
-   
-   **During installation, you'll need**:
-   - GitHub Personal Access Token (PAT) - Create at https://github.com/settings/tokens
+   **Prerequisites**:
+   - GitHub Personal Access Token (PAT) — create at https://github.com/settings/tokens
    - Grant ONLY Read permissions: `read:org`, `read:repo_hook`, `read:user`, `read:discussion`, `read:enterprise`, `read:project`
-   - Select latest Python version when prompted
-   
-   **After installation**:
-   - Restart Cursor (File → Quit, then reopen)
-   - MCP should now appear in Cursor Settings
+
+   **Configure in Cursor**:
+   1. Open Cursor **Settings → MCP** (or edit `~/.cursor/mcp.json`)
+   2. Add the GitHub MCP server:
+      ```json
+      {
+        "mcpServers": {
+          "github": {
+            "command": "npx",
+            "args": ["-y", "@modelcontextprotocol/server-github"],
+            "env": {
+              "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-pat>"
+            }
+          }
+        }
+      }
+      ```
+   3. Replace `<your-pat>` with your token (or use an environment variable)
+   4. Restart Cursor (File → Quit, then reopen)
+
+   **If you need a full walkthrough** → See [FIRST-TIME-SETUP.md](./FIRST-TIME-SETUP.md).
 
 3. **Verify GitHub MCP is working**:
    ```

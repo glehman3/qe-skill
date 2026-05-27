@@ -68,17 +68,17 @@ Comprehensive Quality Engineering Suite with multiple features for building bett
 4. **Configure MCP servers** (GitHub MCP required for `/qforge`):
    
    **Choose your setup path**:
-   - **☁️ Already Have Cloud Workspace?** → No CODEGEN setup required!
+   - **☁️ Already Have Cloud Workspace?** → No extra MCP setup required!
      - Go to Cursor **Settings → Tools & MCP's**
      - Enable **DAST-Orch** (includes GitHub MCP)
      - Time: 1 minute
    
    - **👋 First Time User?** (Never installed MCPs) → [qualityforge/setup/FIRST-TIME-SETUP.md](./qualityforge/setup/FIRST-TIME-SETUP.md)
-     - Complete walkthrough: Cursor, CODEGEN CLI, GitHub MCP installation
+     - Complete walkthrough: Cursor, GitHub PAT, GitHub MCP configuration
      - Time: 15-20 minutes
    
-   - **⚙️ Already Have CODEGEN CLI?** → [qualityforge/setup/MCP-SETUP.md](./qualityforge/setup/MCP-SETUP.md)
-     - Quick guide to install GitHub MCP
+   - **⚙️ Need to configure MCPs?** → [qualityforge/setup/MCP-SETUP.md](./qualityforge/setup/MCP-SETUP.md)
+     - Quick guide to set up GitHub MCP in Cursor
      - Time: 5 minutes
 
 5. **Start using `/qforge`**:

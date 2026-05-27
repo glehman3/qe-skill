@@ -19,10 +19,9 @@ Simply:
 
 **What you'll install (if not using Cloud Workspace):**
 1. ✅ Cursor IDE
-2. ✅ CODEGEN CLI (company's MCP management tool)
-3. ✅ GitHub MCP (Required for QualityForge)
-4. ⭐ Mabl MCP (Optional - enhances test generation)
-5. ⭐ Google Drive MCP (Optional - enables Google Sheets creation)
+2. ✅ GitHub MCP (Required for QualityForge)
+3. ⭐ Mabl MCP (Optional - enhances test generation)
+4. ⭐ Google Drive MCP (Optional - enables Google Sheets creation)
 
 **Time Required**: ~15-20 minutes
 
@@ -84,7 +83,7 @@ You should now see `https` for `github.com`.
 
 ## Step 3: Install Prerequisites
 
-These tools are required for CODEGEN CLI and MCP installation.
+These tools are required for MCP installation and local development.
 
 ### Install Command Line Tools (if needed)
 
@@ -120,58 +119,7 @@ pipx ensurepath
 
 ---
 
-## Step 4: Install CODEGEN CLI
-
-BEFORE INSTALLING CODEGEN CLI, THERE IS AN EIM REQUIREMENT. RUN THE FOLLOWING COMMANDS BEFORE CONTINUING WITH CODEGEN CLI SETUP:
-
-```bash
-git config --global url."https://github.com/".insteadOf git@github.com:
-```
-
-```bash
-brew tap org/authcli git@github.com:EIAM/eiamCli-golang.git
-```
-and
-
-```bash
-brew install eiamCli
-```
-
-CODEGEN CLI is company's tool for managing MCPs in Cursor.
-
-### Download CODEGEN CLI
-
-```bash
-pip3 download platformexps-tools-codegencli-codegencli
-```
-
-**Expected**: Downloads a `.whl` file to your current directory
-
-### Install CODEGEN CLI
-
-```bash
-pipx install --force platformexps_tools_codegencli_codegencli-*
-```
-
-**Expected Output**:
-```
-  installed package platformexps-tools-codegencli-codegencli X.X.X, installed using Python 3.X.X
-  These apps are now globally available
-    - codegen
-done! ✨ 🌟 ✨
-```
-
-### Verify Installation
-
-```bash
-codegen version
-```
-
-**Expected**: Shows CODEGEN CLI version
-
----
-
-## Step 5: Create GitHub Personal Access Token (PAT)
+## Step 4: Create GitHub Personal Access Token (PAT)
 
 You'll need a PAT to authenticate GitHub MCP.
 
@@ -199,39 +147,31 @@ You'll need a PAT to authenticate GitHub MCP.
 
 ---
 
-## Step 6: Install GitHub MCP
+## Step 5: Configure GitHub MCP in Cursor
 
-Now install the GitHub MCP using CODEGEN CLI.
+Add the GitHub MCP server to your Cursor configuration.
 
-### Run Installation Command
+### Edit MCP Configuration
 
-```bash
-codegen mcp install github-mcp:latest
+1. Open Cursor **Settings → MCP** (or edit `~/.cursor/mcp.json` directly)
+2. Add the GitHub MCP server under `mcpServers`:
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<paste-your-pat-here>"
+      }
+    }
+  }
+}
 ```
 
-### During Installation
-
-You'll be prompted several times:
-
-1. **Python Version Selection**: 
-   - Select the **latest Python 3.x version** (highest number)
-   - Avoid older versions from previous installs
-
-2. **Personal Access Token**:
-   - Paste the PAT you created in Step 5
-   - Press Enter
-
-3. **Configuration Questions**:
-   - Follow any additional prompts
-   - Default options are usually fine
-
-### Expected Output
-
-```
-✓ Successfully installed github-mcp
-✓ MCP server configured in Cursor
-✓ Ready to use!
-```
+3. Replace `<paste-your-pat-here>` with the PAT from Step 4
+4. Save the configuration file
 
 ### Restart Cursor
 
@@ -239,7 +179,7 @@ You'll be prompted several times:
 
 ---
 
-## Step 7: Verify GitHub MCP Installation
+## Step 6: Verify GitHub MCP Installation
 
 After restarting Cursor, verify the installation.
 
@@ -269,7 +209,7 @@ check my MCP setup
 
 ---
 
-## Step 8: (Optional) Install Mabl MCP
+## Step 7: (Optional) Install Mabl MCP
 
 Mabl MCP is optional but enhances test generation with automation coverage analysis.
 
@@ -291,7 +231,7 @@ Contact your Mabl administrator for:
 
 ---
 
-## Step 9: (Optional) Install Additional MCPs
+## Step 8: (Optional) Install Additional MCPs
 
 ### Google Drive MCP (Recommended for Google Sheets creation)
 
@@ -301,15 +241,9 @@ Google Drive MCP enables creating formatted Google Sheets directly from test jam
 
 ### Bugsnag MCP
 
-For error tracking and debugging:
-
-```bash
-codegen mcp install bugsnag-mcp:latest
-```
+For error tracking and debugging, add Bugsnag MCP via Cursor Settings or your MCP configuration file. See the [Bugsnag MCP documentation](https://github.com/modelcontextprotocol/servers) for setup details.
 
 **Use Case**: Identify bugs and errors in production
-
-**Discussion**: https://company.slack.com/archives/C03TD1T7DP0/p1745344496369909
 
 ---
 
@@ -347,103 +281,15 @@ Before using QualityForge, verify:
 - [ ] Cursor IDE is installed and running
 - [ ] GitHub authentication is configured (`gh auth status`)
 - [ ] Python 3.9+ is installed (`python3 --version`)
-- [ ] eiamCli is installed (`eiamcli --version`)
-- [ ] CODEGEN CLI is installed (`codegen --version`)
+- [ ] Node.js is installed (`node --version`) — required for GitHub MCP via npx
 - [ ] GitHub Personal Access Token is created and saved
-- [ ] GitHub MCP is installed (`codegen mcp list` shows github-mcp)
-- [ ] Cursor has been restarted after MCP installation
+- [ ] GitHub MCP is configured in Cursor Settings → MCP
+- [ ] Cursor has been restarted after MCP configuration
 - [ ] MCP verification passes (type: `check my MCP setup`)
 
 ---
 
 ## 🐛 Troubleshooting
-
-### "codegen: command not found"
-
-**Solution**:
-```bash
-# Ensure pipx path is configured
-pipx ensurepath
-
-# Restart your terminal
-source ~/.zshrc  # or source ~/.bashrc
-
-# Verify
-codegen --version
-```
-
-### "eiamcli: command not found" or Tap Errors
-
-**Solution**:
-```bash
-# Ensure you have SSH access to github.com
-ssh -T git@github.com
-
-# If SSH works, retry the tap:
-brew tap org/authcli git@github.com:EIAM/eiamCli-golang.git
-brew install eiamCli
-
-# Verify
-eiamcli --version
-```
-
-**Note**: The tap requires SSH access to github.com. If you see "permission denied: publickey", see the SSH setup section below.
-
-### "Permission denied (publickey)" Error
-
-**Problem**: When running `brew tap` or `git clone` with SSH URLs, you see:
-```
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-```
-
-**Cause**: Your machine doesn't have an SSH key registered with github.com.
-
-**Solution - Set up SSH key**:
-
-1. **Check if you already have an SSH key**:
-   ```bash
-   ls -la ~/.ssh/id_ed25519.pub
-   # or
-   ls -la ~/.ssh/id_rsa.pub
-   ```
-
-2. **If no key exists, generate one**:
-   ```bash
-   ssh-keygen -t ed25519 -C "your.email@example.com"
-   # Press Enter to accept default location
-   # Enter a passphrase (recommended) or press Enter for none
-   ```
-
-3. **Start the SSH agent and add your key**:
-   ```bash
-   eval "$(ssh-agent -s)"
-   ssh-add ~/.ssh/id_ed25519
-   ```
-
-4. **Copy the public key to your clipboard**:
-   ```bash
-   pbcopy < ~/.ssh/id_ed25519.pub
-   ```
-
-5. **Add the key to GitHub**:
-   - Go to: https://github.com/settings/keys
-   - Click "New SSH key"
-   - Title: "Work Laptop" (or similar)
-   - Paste the key
-   - Click "Add SSH key"
-
-6. **Verify SSH works**:
-   ```bash
-   ssh -T git@github.com
-   ```
-   **Expected**: `Hi username! You've successfully authenticated...`
-
-7. **Now retry the brew tap**:
-   ```bash
-   brew tap org/authcli git@github.com:EIAM/eiamCli-golang.git
-   brew install eiamCli
-   ```
 
 ### "gh: command not found"
 
@@ -455,18 +301,15 @@ gh auth login -h github.com -p https -w
 
 ### Python Version Issues
 
-**Problem**: CODEGEN installs with wrong Python version
+**Problem**: MCP server fails to start due to Python version
 
 **Solution**:
 ```bash
 # Check available Python versions
-ls /usr/local/bin/python*
+python3 --version
 
-# Use the latest version explicitly
-python3.11 --version  # (use your latest version)
-
-# Reinstall with specific Python version
-pipx install --force --python python3.11 platformexps_tools_codegencli_codegencli-*
+# Ensure Python 3.9+ is installed
+brew install python3
 ```
 
 ### MCP Not Showing in Cursor
@@ -474,8 +317,9 @@ pipx install --force --python python3.11 platformexps_tools_codegencli_codegencl
 **Solutions**:
 1. Restart Cursor (File → Quit, then reopen)
 2. Check Cursor Settings → MCP Servers
-3. Verify installation: `codegen mcp list`
-4. Reinstall if needed: `codegen mcp install github-mcp:latest --force`
+3. Verify `~/.cursor/mcp.json` syntax is valid JSON
+4. Confirm Node.js is installed (`node --version`) for npx-based MCP servers
+5. Re-add the GitHub MCP entry if needed (see Step 5)
 
 ### Personal Access Token Errors
 
@@ -542,33 +386,19 @@ cursor /path/to/messaging-app
 - ❌ Never share tokens publicly
 - ❌ Never grant Write permissions unless required
 
-### Update CODEGEN Regularly
-
-```bash
-# Check for updates
-codegen --version
-
-# Update CODEGEN
-pipx upgrade platformexps-tools-codegencli-codegencli
-
-# Update MCPs
-codegen mcp update github-mcp
-```
-
 ---
 
 ## 📚 Additional Resources
 
 ### Documentation
-- **Cursor Onboarding**: https://docs.example.com/app/dp/capability/CAP-2127/capabilityDocs/main/docs/reference/cursor/onboarding_guide.md
+- **Cursor MCP Docs**: https://docs.cursor.com/context/model-context-protocol
 - **Test Jam README**: [README.md](../README.md)
 - **MCP Setup Guide**: [MCP-SETUP.md](./MCP-SETUP.md)
 - **Quick Start**: [QUICK-START.md](../QUICK-START.md)
 
 ### Support Channels
 - **Slack**: #mcqa channel
-- **CODEGEN Issues**: Reach out to Gregory Lehman (@greg)
-- **General Cursor**: #cursor-support or internal documentation
+- **General Cursor**: Cursor documentation or community forums
 
 ### Related Tools
 - **Bugsnag MCP**: For error tracking

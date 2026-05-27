@@ -9,7 +9,7 @@ Before using `/testjam` or `/qforge`:
 
 **Setup Guides** (choose one):
 - **👋 First Time User?** → [FIRST-TIME-SETUP.md](./setup/FIRST-TIME-SETUP.md) - Complete walkthrough from scratch
-- **⚙️ Have CODEGEN Already?** → [MCP-SETUP.md](./setup/MCP-SETUP.md) - Quick MCP installation
+- **⚙️ Configure MCPs** → [MCP-SETUP.md](./setup/MCP-SETUP.md) - Quick MCP configuration
 
 ---
 

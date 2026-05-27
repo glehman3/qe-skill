@@ -40,7 +40,7 @@
 1. **Check for GitHub MCP** (REQUIRED): Attempt to use `mcp_github-mcp_search_repositories` with a simple query (e.g., query="test", perPage=1)
    - If tool is NOT available or returns error: Display setup instructions and STOP
    - Setup guides: [FIRST-TIME-SETUP.md](../../../../qualityforge/setup/FIRST-TIME-SETUP.md) | [MCP-SETUP.md](../../../../qualityforge/setup/MCP-SETUP.md)
-   - Quick install: `codegen mcp install github-mcp:latest`
+   - Quick setup: Configure GitHub MCP in Cursor Settings → MCP (see MCP-SETUP.md)
    - If available and working: Display "✅ GitHub MCP detected and ready"
 
 2. **Check for Mabl MCP** (OPTIONAL): Verify if Mabl MCP tools are available

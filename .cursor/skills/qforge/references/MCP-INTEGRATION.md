@@ -142,7 +142,18 @@ cloudId = resources[0]["id"]  # e.g., "f4f7b1b7-a9c1-4eb7-97ba-e4842db0f223"
 - [FIRST-TIME-SETUP.md](../../../../qualityforge/setup/FIRST-TIME-SETUP.md)
 - [MCP-SETUP.md](../../../../qualityforge/setup/MCP-SETUP.md)
 
-Quick install for GitHub MCP:
-```bash
-codegen mcp install github-mcp:latest
+Quick install for GitHub MCP — add to `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-pat>"
+      }
+    }
+  }
+}
 ```

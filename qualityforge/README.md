@@ -313,13 +313,13 @@ This tool integrates with multiple MCP servers:
 
 **👋 First Time User? (Never installed MCPs before)**
 - → [First Time Setup](./setup/FIRST-TIME-SETUP.md) - Complete walkthrough
-- Includes: Cursor installation, CODEGEN CLI, GitHub authentication, GitHub MCP
+- Includes: Cursor installation, GitHub authentication, GitHub MCP configuration
 - Time: 15-20 minutes
 - Starts from scratch with zero assumptions
 
-**⚙️ Already Have CODEGEN CLI?**
-- → [MCP Setup Guide](./setup/MCP-SETUP.md) - Quick MCP installation guide
-- Just need to install GitHub MCP
+**⚙️ Need to configure MCPs?**
+- → [MCP Setup Guide](./setup/MCP-SETUP.md) - Quick MCP configuration guide
+- Configure GitHub MCP in Cursor settings
 - Time: 5 minutes
 
 Ensure MCP servers are configured in your Cursor settings before using `/qforge`.
