@@ -12,7 +12,7 @@ This document defines all fields required for creating test accounts via the Tes
 - **Field Type**: Dropdown
 - **Required**: Yes
 - **Description**: The shard/server where the account will be created
-- **Example Values**: `us1`, `us2`, `us3`, etc.
+- **Example Values**: `us-east`, `us-west`, `eu-west`, etc.
 - **Default**: `us1`
 
 ### Creation Date
@@ -31,7 +31,7 @@ This document defines all fields required for creating test accounts via the Tes
 - **Default**: Current time
 - **Example**: `02:01 PM`
 
-### Manually Activate Account
+### Manual Activation Account
 - **Field Type**: Radio button (Yes/No)
 - **Required**: Yes
 - **Options**: 
@@ -40,19 +40,19 @@ This document defines all fields required for creating test accounts via the Tes
 - **Default**: `No`
 - **Description**: Select 'No' to skip setup flow and activate immediately
 
-### Set Account Entry Point
+### Set Account Signup Source
 - **Field Type**: Dropdown
 - **Required**: Yes
 - **Options**: `Default`, and other entry points
 - **Default**: `Default`
 - **Description**: Defines how the account was created/acquired
 
-### Mark Account as Experimental for Optimizely
+### Mark Account as Experimental for A/B testing platform
 - **Field Type**: Toggle switch
 - **Required**: No
 - **Options**: `On` / `Off`
 - **Default**: `Off`
-- **Description**: Flags account for Optimizely experiments
+- **Description**: Flags account for A/B test experiments
 
 ---
 
@@ -72,8 +72,8 @@ This document defines all fields required for creating test accounts via the Tes
 - **Field Type**: Text input (auto-generated)
 - **Required**: Yes
 - **Description**: Unique username for the account
-- **Auto-generated Format**: `automation_platform_[random]`
-- **Example**: `automation_platform_3nBigh7`
+- **Auto-generated Format**: `test_account_[random]`
+- **Example**: `test_account_3nBigh7`
 - **Notes**: System generates a random username; can be customized if needed
 
 ### Password
@@ -95,7 +95,7 @@ This document defines all fields required for creating test accounts via the Tes
 - **Field Type**: Text input
 - **Required**: Yes
 - **Description**: Account holder's first name
-- **Example**: `Gregory`
+- **Example**: `Alex`
 
 ### Last Name
 - **Field Type**: Text input
@@ -179,26 +179,26 @@ This document defines all fields required for creating test accounts via the Tes
   - Multiple flags separated by commas
   - Check with dev team for available flags
 
-### Set Marketing Plan
+### Set Subscription Plan
 - **Field Type**: Dropdown
 - **Required**: Yes
 - **Options**: 
-  - `Free plan (500 contacts)` - Basic email only
-  - `Essentials (500+ contacts)` - Email + basic features
-  - `Standard (500+ contacts)` - Advanced features + automation
-  - `Premium (10,000+ contacts)` - Full feature set
+  - `Starter plan (500 seats)` - Basic email only
+  - `Basic (500+ seats)` - Email + basic features
+  - `Pro (500+ seats)` - Advanced features + automation
+  - `Enterprise (10,000+ contacts)` - Full feature set
   - Contact tiers vary by plan
-- **Default**: `Free plan (500 contacts)`
-- **Description**: Initial marketing plan/tier for the account
+- **Default**: `Starter plan (500 seats)`
+- **Description**: Initial subscription plan/tier for the account
 - **🚨 CRITICAL**: Must match feature requirements or tests will fail!
-  - **SMS/MMS** → Requires Essentials+ (NOT Free)
-  - **Marketing Automation** → Requires Standard+ (NOT Free/Essentials)
-  - **AI Features** → Requires Standard+
+  - **SMS/MMS** → Requires Basic+ (NOT Starter)
+  - **Marketing Automation** → Requires Pro+ (NOT Starter/Basic)
+  - **AI Features** → Requires Pro+
   - See [feature-to-plan-mapping.md](./feature-to-plan-mapping.md) for complete matrix
 - **Notes**: 
   - Plan can be changed after account creation via admin-console
   - Some features require add-ons (e.g., SMS) even with correct plan
-  - Contact tier affects pricing but not feature availability (except Premium)
+  - Contact tier affects pricing but not feature availability (except Enterprise)
 
 ---
 
@@ -217,26 +217,26 @@ This document defines all fields required for creating test accounts via the Tes
 ## Field Dependencies and Validation Rules
 
 ### Required Field Combinations:
-1. **Minimum Required**: Shard, Creation Date/Time, Email, Username, Password, First Name, Last Name, Address, City, State, Zipcode, Country, Sending Domain, Company Name, Company Domain, Marketing Plan
+1. **Minimum Required**: Shard, Creation Date/Time, Email, Username, Password, First Name, Last Name, Address, City, State, Zipcode, Country, Sending Domain, Company Name, Company Domain, Subscription Plan
 
 2. **For Specific Test Scenarios**:
    - **SMS Testing**: 
-     - ⚠️ Requires Essentials, Standard, or Premium (NOT Free)
-     - Must purchase SMS add-on separately after account creation
-     - Document "+ SMS add-on" in Marketing Plan or Notes
+     - ⚠️ Requires Basic, Pro, or Enterprise (NOT Starter)
+     - Must purchase messaging add-on separately after account creation
+     - Document "+ messaging add-on" in Subscription Plan or Notes
    - **MMS Testing**: 
-     - ⚠️ Requires Standard or Premium (NOT Free or Essentials)
-     - Must purchase SMS add-on with MMS capabilities
+     - ⚠️ Requires Pro or Enterprise (NOT Starter or Basic)
+     - Must purchase messaging add-on with MMS capabilities
    - **Marketing Automation Testing**: 
-     - ⚠️ Requires Standard or Premium (NOT Free or Essentials)
+     - ⚠️ Requires Pro or Enterprise (NOT Starter or Basic)
    - **AI Features Testing**:
-     - ⚠️ Requires Standard or Premium
+     - ⚠️ Requires Pro or Enterprise
    - **API Testing**: May need specific feature flags enabled
    - **International Testing**: Set appropriate Country, State combinations
 
 ### Common Validation Errors:
 - **Invalid Email Format**: Must be valid email syntax
-- **Duplicate Username**: Username must be unique across shard
+- **Duplicate Username**: Username must be unique across region
 - **Invalid ZIP/State Combo**: ZIP code must match selected state
 - **Invalid URL Format**: Company Domain must include `https://` or `http://`
 
@@ -250,7 +250,7 @@ This document defines all fields required for creating test accounts via the Tes
 
 2. **Email Aliases**:
    - Use `+` notation for multiple test accounts
-   - Example: `qa_automation+sms_test@example.com`, `qa_automation+api_test@example.com`
+   - Example: `qa.test+sms_test@example.com`, `qa.test+api_test@example.com`
 
 3. **Feature Flags**:
    - Coordinate with dev team to understand available flags
@@ -261,10 +261,10 @@ This document defines all fields required for creating test accounts via the Tes
    - **ALWAYS verify plan matches feature requirements** 
    - See [feature-to-plan-mapping.md](./feature-to-plan-mapping.md) for complete matrix
    - Common mistakes:
-     - ❌ Free plan for SMS (needs Essentials+)
-     - ❌ Essentials for automation (needs Standard+)
-     - ❌ Essentials for MMS (needs Standard+)
-   - When in doubt, use Standard plan (covers most features)
+     - ❌ Starter plan for SMS (needs Basic+)
+     - ❌ Basic for automation (needs Pro+)
+     - ❌ Basic for MMS (needs Pro+)
+   - When in doubt, use Pro plan (covers most features)
    - Document plan selection rationale in Notes column
 
 5. **Documentation**:
@@ -286,7 +286,7 @@ This document defines all fields required for creating test accounts via the Tes
 
 ### Cannot Login to Created Account
 - **Check**: Username and password copied correctly
-- **Check**: Account activation status (manually activate = No recommended)
+- **Check**: Account activation status (manual activate = No recommended)
 - **Check**: Correct shard URL being used
 - **Check**: Account creation completed successfully
 

@@ -2,7 +2,7 @@
  * Google Apps Script to copy formatting from source spreadsheet to destination spreadsheet.
  * 
  * To use this script:
- * 1. Open the SOURCE spreadsheet: https://docs.google.com/spreadsheets/d/1M-hX9tNlGmXi-Efis05T35uftDkfR9w6QHg-kPM9h4g/edit
+ * 1. Open the SOURCE spreadsheet: https://docs.google.com/spreadsheets/d/1ExampleSourceSpreadsheetId00000000000/edit
  * 2. Go to Extensions > Apps Script
  * 3. Paste this entire script
  * 4. Save and run the copyFormatting function
@@ -10,7 +10,7 @@
  */
 
 // Source spreadsheet (formatting guide)
-const SOURCE_ID = "1M-hX9tNlGmXi-Efis05T35uftDkfR9w6QHg-kPM9h4g";
+const SOURCE_ID = "1ExampleSourceSpreadsheetId00000000000";
 const SOURCE_SHEET_NAME = "Test Cases";
 
 // Destination spreadsheet (to be formatted)

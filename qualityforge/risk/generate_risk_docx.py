@@ -3,9 +3,9 @@
 QualityForge DOCX Generator
 
 Generates professionally formatted Word documents from QualityForge outputs
-with proper Acme Platform/company branding:
-- Font: Avenir Next For company (falls back to Avenir)
-- Colors: Peppercorn (#241C15) headers, Cavendish Yellow (#FFE01B) accents
+with proper Helix Platform/company branding:
+- Font: Helvetica Neue (falls back to Arial)
+- Colors: Header Dark (#241C15) headers, Accent Yellow (#FFE01B) accents
 
 Supports both:
 - Risk Analysis folders (contains risk_analysis_report.md)
@@ -53,9 +53,9 @@ except ImportError:
 # BRANDING CONSTANTS
 # =============================================================================
 
-# Acme Platform brand colors
-CAVENDISH_YELLOW = RGBColor(0xFF, 0xE0, 0x1B)
-PEPPERCORN = RGBColor(0x24, 0x1C, 0x15)
+# Helix Platform brand colors
+ACCENT_YELLOW = RGBColor(0xFF, 0xE0, 0x1B)
+HEADER_DARK = RGBColor(0x24, 0x1C, 0x15)
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 
 # Severity colors
@@ -65,8 +65,8 @@ MEDIUM_YELLOW = RGBColor(0xBF, 0x90, 0x00)
 LOW_GREEN = RGBColor(0x53, 0x81, 0x35)
 
 # company brand font
-BRAND_FONT = 'Avenir Next For company'
-FALLBACK_FONT = 'Avenir'
+BRAND_FONT = 'Helvetica Neue'
+FALLBACK_FONT = 'Arial'
 
 
 # =============================================================================
@@ -147,7 +147,7 @@ def add_styled_heading(doc, text, level=1):
     """Add a heading with brand styling."""
     heading = doc.add_heading(text, level)
     for run in heading.runs:
-        run.font.color.rgb = PEPPERCORN
+        run.font.color.rgb = HEADER_DARK
         run.font.name = BRAND_FONT
     return heading
 
@@ -272,7 +272,7 @@ def generate_risk_analysis_docx(folder_path, output_path=None):
     title = doc.add_heading(title_text, 0)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     for run in title.runs:
-        run.font.color.rgb = PEPPERCORN
+        run.font.color.rgb = HEADER_DARK
         run.font.name = BRAND_FONT
     
     # Extract feature name from subtitle or folder name
@@ -407,7 +407,7 @@ def generate_test_coverage_docx(folder_path, output_path=None):
     title = doc.add_heading('Test Case Coverage Map', 0)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     for run in title.runs:
-        run.font.color.rgb = PEPPERCORN
+        run.font.color.rgb = HEADER_DARK
         run.font.name = BRAND_FONT
     
     # Info

@@ -43,8 +43,8 @@ this.closeModalButton = page.getByRole('button', { name: 'Close Modal' });
 this.viewReporting = page.getByRole('link', { name: 'View reporting' });
 
 // Headings
-this.appNameHeaderWix = page.getByRole('heading', {
-  name: 'You've connected Wix & Acme Platform!',
+this.appNameHeaderPartner = page.getByRole('heading', {
+  name: 'You've connected Partner App & Helix Platform!',
 });
 
 // With exact match
@@ -57,7 +57,7 @@ this.appNameHeaderShopify = page.getByRole('heading', {
 ### 2. `getByLabel()` - Form Inputs
 ```javascript
 this.disconnectRemoveRadioButton = page.getByLabel(
-  'Remove customer, product, and order data on Acme Platform',
+  'Remove customer, product, and order data on Helix Platform',
 );
 
 this.deleteInput = page.getByLabel('Type DELETE to confirm');
@@ -81,7 +81,7 @@ this.settingHeader = page.getByTestId('app-settings-header');
 this.wooCommerceTagSetting = page
   .locator('li')
   .filter({
-    hasText: 'Tag WooCommerce customersFilter your Acme Platform contacts and personalize your mar',
+    hasText: 'Tag WooCommerce customersFilter your Helix Platform contacts and personalize your mar',
   })
   .getByRole('button');
 
@@ -135,7 +135,7 @@ async importContactsCsvFile() {
   await this.continueBtn.click();
   await this.fileInput.waitFor();
   await this.continueBtn.waitFor();
-  await this.fileInput.setInputFiles('config/contacts/acme_contacts.csv');
+  await this.fileInput.setInputFiles('config/contacts/sample_contacts.csv');
   await this.continueBtn.click();
   await this.continueBtn.click();
   await this.continueBtn.click();
@@ -151,7 +151,7 @@ async importContactsCsvFile() {
 // Wait for frame to be available
 async waitForAudiencePageToLoad(audience_name) {
   await this.page
-    .frameLocator(`iframe[title="All subscribers of ${audience_name} \\| Acme Platform"]`)
+    .frameLocator(`iframe[title="All subscribers of ${audience_name} \\| Helix Platform"]`)
     .getByRole('heading', { name: 'Audience', exact: true })
     .click();
 }
@@ -162,7 +162,7 @@ async selectStagedAudienceProfile(number_of_contacts, audience_name, contact_nam
     .getByRole('link', { name: `${number_of_contacts}` })
     .click();
   await this.page
-    .frameLocator(`iframe[title="All subscribers of ${audience_name} \\| Acme Platform"]`)
+    .frameLocator(`iframe[title="All subscribers of ${audience_name} \\| Helix Platform"]`)
     .getByRole('link', { name: `${contact_name}` })
     .click();
 }
@@ -186,7 +186,7 @@ async selectAudience(audience) {
 ### Visibility Assertions
 ```javascript
 await expect(this.importSuccessHeader).toBeVisible();
-await expect(this.appNameHeaderWix).toHaveText('You've connected Wix & Acme Platform!');
+await expect(this.appNameHeaderPartner).toHaveText('You've connected Partner App & Helix Platform!');
 ```
 
 ### URL Assertions
@@ -199,7 +199,7 @@ async verifyCurrentUrl(expectedUrl) {
 ### Text Content Assertions
 ```javascript
 await expect(this.disconnectDescription).toHaveText(
-  'Deleting this data from Acme Platform can't be undone',
+  'Deleting this data from Helix Platform can't be undone',
 );
 ```
 
@@ -253,7 +253,7 @@ this.topColumnSelect = page.getByRole('button', { name: 'Birthday' });
 this.wooCommercePaintedDoorBtn = page
   .locator('li')
   .filter({
-    hasText: 'Tag WooCommerce customersFilter your Acme Platform contacts and personalize your mar',
+    hasText: 'Tag WooCommerce customersFilter your Helix Platform contacts and personalize your mar',
   })
   .getByRole('button');
 ```
@@ -261,7 +261,7 @@ this.wooCommercePaintedDoorBtn = page
 ### Modal Patterns
 ```javascript
 // Modal headers
-this.mobileDownloadModalHeader = page.getByText('Scan and download the Acme Platform app');
+this.mobileDownloadModalHeader = page.getByText('Scan and download the Helix Platform app');
 
 // Modal close buttons
 this.closeModalButton = page.getByRole('button', { name: 'Close Modal' });
@@ -309,7 +309,7 @@ this.updateExistingCheckbox = page.getByLabel('Update any existing contacts');
 
 // Radio button with label
 this.disconnectRemoveRadioButton = page.getByLabel(
-  'Remove customer, product, and order data on Acme Platform',
+  'Remove customer, product, and order data on Helix Platform',
 );
 
 // Click to toggle
@@ -400,9 +400,9 @@ async clickRefresh() {
 ### Config File Paths
 ```javascript
 // Use relative paths from project root
-await this.fileInput.setInputFiles('config/contacts/acme_contacts.csv');
+await this.fileInput.setInputFiles('config/contacts/sample_contacts.csv');
 await this.fileInput.setInputFiles('config/contacts/mailbots_500_contacts.csv');
-await this.fileInput.setInputFiles('config/contacts/acme_contacts.xlsx');
+await this.fileInput.setInputFiles('config/contacts/sample_contacts.xlsx');
 ```
 
 ### Dynamic Test Data
@@ -411,7 +411,7 @@ async selectStagedAudienceProfile(number_of_contacts, audience_name, contact_nam
   // Use parameters to make tests flexible
   await this.page.getByRole('link', { name: `${number_of_contacts}` }).click();
   await this.page
-    .frameLocator(`iframe[title="All subscribers of ${audience_name} \\| Acme Platform"]`)
+    .frameLocator(`iframe[title="All subscribers of ${audience_name} \\| Helix Platform"]`)
     .getByRole('link', { name: `${contact_name}` })
     .click();
 }
@@ -419,7 +419,7 @@ async selectStagedAudienceProfile(number_of_contacts, audience_name, contact_nam
 
 ---
 
-## 11. Acme Platform UI Component Patterns
+## 11. Helix Platform UI Component Patterns
 
 ### Banner Components
 ```javascript
@@ -430,7 +430,7 @@ this.recommendationAudienceDashboardBanner = page.locator(
 
 // Compressed banner
 this.recommendationSegmentsCompressedBanner = page.locator(
-  "div[class*='marketing-ipd-tsa-widgets']>> div[class*='mc-compressed-banner applied-acme-platform-theme align-right']",
+  "div[class*='marketing-ipd-tsa-widgets']>> div[class*='mc-compressed-banner applied-helix-platform-theme align-right']",
 );
 ```
 
@@ -453,7 +453,7 @@ this.recommendationBannerImg = page.locator("div[class*='bannerContainer']>> img
 
 ---
 
-## 12. Common Acme Platform Workflows
+## 12. Common Helix Platform Workflows
 
 ### Import Contacts Workflow
 ```javascript
@@ -510,7 +510,7 @@ async disconnectIntegration() {
 
 ## 14. Generator-Specific Rules
 
-When generating Playwright tests for Acme Platform:
+When generating Playwright tests for Helix Platform:
 
 1. **Always use** `page.getByRole()` first
 2. **If text is unique**, use `page.getByText()` with `{ exact: true }`
@@ -525,7 +525,7 @@ When generating Playwright tests for Acme Platform:
 
 ---
 
-## 15. Example Generated Test (Acme Platform Style)
+## 15. Example Generated Test (Helix Platform Style)
 
 ```typescript
 import { test, expect } from '@playwright/test';

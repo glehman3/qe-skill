@@ -41,22 +41,22 @@ When prompted, provide ONE of these options:
 
 **Option A - PR(s)** (Recommended):
 ```
-https://github.com/org/project/pull/12345
+https://github.com/nova-corp/helix-api/pull/12345
 ```
 
 Or multiple PR's (comma-separated):
 ```
-https://github.com/org/project/pull/12345, https://github.com/org/project/pull/12346
+https://github.com/nova-corp/helix-api/pull/12345, https://github.com/nova-corp/helix-api/pull/12346
 ```
 
 **Option B - Repository:**
 ```
-Repository: org/project
+Repository: nova-corp/helix-api
 ```
 
 **Option C - PRD** (Early Stage Testing):
 ```
-PRD URL: https://confluence.example.com/display/MAIL/SMS-Feature
+PRD URL: https://confluence.example.com/display/HELIX/SMS-Feature
 
 PRD Contents: [Paste the full PRD text here, including:]
 - PRD Title
@@ -158,7 +158,7 @@ AI: Welcome to easy Test Jam creation! 🎯
     1. PR URL(s) or Repository name(s) to be tested
     2. Any specific areas of focus or concerns
 
-User: https://github.com/org/project/pull/12345
+User: https://github.com/nova-corp/helix-api/pull/12345
       Focus: SMS sending functionality, especially error handling
 
 AI: Thank you for submitting those! 
@@ -238,7 +238,7 @@ A: Verify the URL, check repository access, and ensure the PR exists and isn't d
 **Scenario**: Analyzing a specific pull request with automation coverage analysis
 
 1. Invoke `/qforge` → Select Option 1
-2. Provide PR URL: `https://github.com/org/project/pull/12345`
+2. Provide PR URL: `https://github.com/nova-corp/helix-api/pull/12345`
 3. Specify participants: `7`
 4. Answer context questions, opt for Mabl integration
 5. Tool fetches PR details, queries Mabl for existing coverage
@@ -274,7 +274,7 @@ A: Verify the URL, check repository access, and ensure the PR exists and isn't d
 **Scenario**: Testing all changes merged in the last 4 weeks
 
 1. Invoke `/qforge` → Select Option 1
-2. Provide repository name: `org/project`
+2. Provide repository name: `nova-corp/helix-api`
 3. Tool fetches last 4 weeks of merged PRs
 4. Prioritizes critical and high-priority PRs
 5. Generates test cases grouped by PR/component

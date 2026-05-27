@@ -17,7 +17,7 @@ from googleapiclient.discovery import build
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # Source spreadsheet (formatting guide)
-SOURCE_SPREADSHEET_ID = "1M-hX9tNlGmXi-Efis05T35uftDkfR9w6QHg-kPM9h4g"
+SOURCE_SPREADSHEET_ID = "1ExampleSourceSpreadsheetId00000000000"
 SOURCE_SHEET_ID = 1131357631
 
 # Destination spreadsheet (to be formatted)

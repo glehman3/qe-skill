@@ -28,24 +28,24 @@ CREDENTIALS_FILE = os.environ.get(
 TOKEN_FILE = Path.home() / '.google-drive-mcp' / 'oauth_token.json'
 
 # Reference spreadsheet (formatting guide)
-REFERENCE_SPREADSHEET_ID = "1ClUZy6YRMExsXXLU7NBygamTp8mmSYiZjV2Cbusp8PQ"
+REFERENCE_SPREADSHEET_ID = "1ExampleReferenceSpreadsheetId000000000"
 
 # Source spreadsheet (test cases)
-SOURCE_SPREADSHEET_ID = "1M-hX9tNlGmXi-Efis05T35uftDkfR9w6QHg-kPM9h4g"
+SOURCE_SPREADSHEET_ID = "1ExampleSourceSpreadsheetId00000000000"
 
 # Destination spreadsheet (Test Jam to be created)
-DEST_SPREADSHEET_ID = "1veKeqpJceRaNdpeLaQFNfsxpceEF8UA7t6MeQE-AR7o"
+DEST_SPREADSHEET_ID = "1ExampleDestSpreadsheetId000000000000"
 
 # Tester assignments
 TESTERS = [
-    {"name": "John Healy", "tab": "john_healy", "tests": ["TC-001", "TC-004", "TC-007", "TC-008", "TC-009", "TC-010", "TC-011", "TC-012"]},
-    {"name": "Andre Pardue", "tab": "andre_pardue", "tests": ["TC-013", "TC-014", "TC-015", "TC-016", "TC-017", "TC-018", "TC-019", "TC-020"]},
-    {"name": "Gregory Lehman", "tab": "gregory_lehman", "tests": ["TC-021", "TC-022", "TC-023", "TC-024", "TC-025", "TC-026", "TC-027", "TC-028"]},
-    {"name": "Matthew Grove", "tab": "matthew_grove", "tests": ["TC-029", "TC-031", "TC-033", "TC-034", "TC-035", "TC-036", "TC-037", "TC-038"]},
-    {"name": "Adrian Kappel", "tab": "adrian_kappel", "tests": ["TC-039", "TC-040", "TC-041", "TC-042", "TC-043", "TC-044", "TC-045", "TC-046", "TC-047"]},
-    {"name": "Christian Barnard", "tab": "christian_barnard", "tests": ["TC-048", "TC-049", "TC-051", "TC-052", "TC-053", "TC-057", "TC-058", "TC-059"]},
-    {"name": "Grace Lane", "tab": "grace_lane", "tests": ["TC-060", "TC-061", "TC-062", "TC-063", "TC-064", "TC-065", "TC-066", "TC-071", "TC-072"]},
-    {"name": "Sheetal Sharma", "tab": "sheetal_sharma", "tests": ["TC-076", "TC-078", "TC-080", "TC-083", "TC-085", "TC-086", "TC-087", "TC-088"]},
+    {"name": "Jordan Blake", "tab": "jordan_blake", "tests": ["TC-001", "TC-004", "TC-007", "TC-008", "TC-009", "TC-010", "TC-011", "TC-012"]},
+    {"name": "Casey Reed", "tab": "casey_reed", "tests": ["TC-013", "TC-014", "TC-015", "TC-016", "TC-017", "TC-018", "TC-019", "TC-020"]},
+    {"name": "Alex Morgan", "tab": "alex_morgan", "tests": ["TC-021", "TC-022", "TC-023", "TC-024", "TC-025", "TC-026", "TC-027", "TC-028"]},
+    {"name": "Riley Chen", "tab": "riley_chen", "tests": ["TC-029", "TC-031", "TC-033", "TC-034", "TC-035", "TC-036", "TC-037", "TC-038"]},
+    {"name": "Sam Foster", "tab": "sam_foster", "tests": ["TC-039", "TC-040", "TC-041", "TC-042", "TC-043", "TC-044", "TC-045", "TC-046", "TC-047"]},
+    {"name": "Taylor Brooks", "tab": "taylor_brooks", "tests": ["TC-048", "TC-049", "TC-051", "TC-052", "TC-053", "TC-057", "TC-058", "TC-059"]},
+    {"name": "Morgan Ellis", "tab": "morgan_ellis", "tests": ["TC-060", "TC-061", "TC-062", "TC-063", "TC-064", "TC-065", "TC-066", "TC-071", "TC-072"]},
+    {"name": "Jamie Patel", "tab": "jamie_patel", "tests": ["TC-076", "TC-078", "TC-080", "TC-083", "TC-085", "TC-086", "TC-087", "TC-088"]},
 ]
 
 # Tab column structure for tester sheets
@@ -225,15 +225,15 @@ def populate_overview(service, sheet_id):
         ["", "Collaborative hands-on event where teams come together to focus on testing the Domain Authentication experience. The goal is to uncover issues, generate insights, and strengthen overall quality."],
         [],
         ["", "Key Links:"],
-        ["", "Feature Flags: \nmctx.streamlined_tx_template_management"],
-        ["", "Jira Project: https://jira.example.com/browse/EEE"],
+        ["", "Feature Flags: \nfeature.streamlined_template_management"],
+        ["", "Jira Project: https://jira.example.com/browse/HELIX"],
         ["", "Test Jam Bug Environments: Production"],
         ["", "Test Jam Bug Labels: tx_fy26_domain-authentication"],
-        ["", "Figma Designs: https://www.figma.com/design/RKv7j68vBnZig9pfJ5xMRD/Transactional-Domain-Authentication-Experiment"],
+        ["", "Figma Designs: https://www.figma.com/file/EXAMPLE/design-mockups"],
         [],
         ["", "Testers:"],
-        ["", "John Healy, Andre Pardue, Gregory Lehman, Matthew Grove"],
-        ["", "Adrian Kappel, Christian Barnard, Grace Lane, Sheetal Sharma"],
+        ["", "Jordan Blake, Casey Reed, Alex Morgan, Riley Chen"],
+        ["", "Sam Foster, Taylor Brooks, Morgan Ellis, Jamie Patel"],
         [],
         ["", "Instructions:"],
         ["", "1. Create test account with the test tool, ensuring feature flags are enabled"],

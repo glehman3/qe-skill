@@ -164,10 +164,10 @@ Run via QualityForge:
 
 ### Step 2: Provide Info
 ```
-PRD URL: https://confluence.example.com/display/MAIL/SMS-Scheduling
+PRD URL: https://confluence.example.com/display/HELIX/SMS-Scheduling
 PRD Content: [Full text...]
-Jira: TXPLAT-5432
-Repository: org/project
+Jira: HELIX-5432
+Repository: nova-corp/helix-api
 ```
 
 ### Step 3: Review Report

@@ -145,7 +145,7 @@ def _write_text(path: Path, content: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Simulate Risk Analysis workflow order-of-operations.")
     parser.add_argument("--feature-slug", default="workflow-simulation", help="Used in output folder name.")
-    parser.add_argument("--repo", default="org/project", help="Repo placeholder.")
+    parser.add_argument("--repo", default="nova-corp/helix-api", help="Repo placeholder.")
     parser.add_argument("--prd-url", default="https://example.com/prd", help="PRD placeholder.")
     parser.add_argument("--prd-title", default="Example PRD", help="PRD title placeholder.")
     parser.add_argument("--jira", default="TESTING-1518", help="Jira placeholder.")

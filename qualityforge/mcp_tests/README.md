@@ -80,7 +80,7 @@ async def test_tcXXX_description(mcp_client):
 
 ## Contributing to messaging-tests
 
-These tests can be contributed to the [mctx/messaging-tests](https://github.com/mctx/messaging-tests) repository. To do so:
+These tests can be contributed to the [nova-corp/helix-tests](https://github.com/nova-corp/helix-tests) repository. To do so:
 
 1. Copy this module to `messaging-tests/common/mcp/`
 2. Add MCP configuration to their settings
@@ -91,4 +91,4 @@ These tests can be contributed to the [mctx/messaging-tests](https://github.com/
 
 - [Messaging MCP Server](https://messagingapp.com/mcp)
 - [QCoE MCP Test Suite](https://docs.google.com/spreadsheets/d/1OwdsZEMWRS2hsweWGv546V14l4QhxV-KnIxjnBrsYSM)
-- [messaging-tests repo](https://github.com/mctx/messaging-tests)
+- [messaging-tests repo](https://github.com/nova-corp/helix-tests)

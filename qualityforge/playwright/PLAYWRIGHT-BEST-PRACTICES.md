@@ -369,7 +369,7 @@ test('Dashboard displays all user info', async ({ page }) => {
   // All assertions are checked even if one fails
   await expect.soft(page.getByText('John Doe')).toBeVisible();
   await expect.soft(page.getByText('john@example.com')).toBeVisible();
-  await expect.soft(page.getByText('Premium Member')).toBeVisible();
+  await expect.soft(page.getByText('Enterprise Member')).toBeVisible();
   await expect.soft(page.getByText('Joined: 2024')).toBeVisible();
 });
 ```

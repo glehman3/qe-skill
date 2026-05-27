@@ -412,8 +412,8 @@ def main() -> None:
         default=None,
         help="Output markdown path (default: jira_ticket_drafts.md next to the CSV)",
     )
-    parser.add_argument("--project-key", default="", help="Jira project key (e.g., EEE)")
-    parser.add_argument("--epic", dest="epic_key", default="", help="Epic key (e.g., EEE-10332)")
+    parser.add_argument("--project-key", default="", help="Jira project key (e.g., HELIX)")
+    parser.add_argument("--epic", dest="epic_key", default="", help="Epic key (e.g., HELIX-10332)")
     parser.add_argument("--label", action="append", default=[], help="Label to apply (repeatable)")
     parser.add_argument("--priority", default="P3", help="Priority label (default: P3)")
     parser.add_argument("--issue-type", default="Story", help="Issue type (default: Story)")

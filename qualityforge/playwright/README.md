@@ -41,7 +41,7 @@ npx @playwright/mcp@latest
 
 **How QualityForge uses this** (high-level):
 - Use MCP-driven snapshots to confirm UI structure
-- Prefer Acme Platform-first locator patterns (`getByRole`, `getByLabel`, `getByText`)
+- Prefer Helix Platform-first locator patterns (`getByRole`, `getByLabel`, `getByText`)
 - Replace TODO placeholders where the live UI makes the intent unambiguous
 
 If Playwright MCP is not installed, generation still works (it just relies on CSV + heuristics + application patterns and will produce more TODOs).
@@ -205,7 +205,7 @@ qualityforge/
 - Generic patterns in `reference/PLAYWRIGHT-BEST-PRACTICES.md`
 - No duplication = no drift = accurate tests ✅
 
-### 2. Acme Platform-First Locators
+### 2. Helix Platform-First Locators
 **Priority order** (from PLAYWRIGHT-PATTERNS.md, based on real monolith code):
 1. `getByRole()` - **HIGHEST** (buttons, links, headings) - Used 127+ times in monolith
 2. `getByLabel()` - Form inputs, checkboxes
@@ -393,5 +393,5 @@ These planning docs live under `_project-dev/` locally and are intentionally **n
 
 **Last Updated**: January 14, 2026  
 **Maintainer**: Greg Lehman  
-**Version**: 2.0 (Acme Platform-enhanced)
+**Version**: 2.0 (Helix Platform-enhanced)
 

@@ -55,7 +55,7 @@ def _fill_template(
 
     out = out.replace("<YYYY-MM-DD>", date)
     out = out.replace("<FEATURE NAME>", feature_name)
-    out = out.replace("<org/repo>", repo)
+    out = out.replace("<nova-corp/helix-api>", repo)
 
     out = out.replace("<JIRA URL OR KEY (optional)>", jira or "<JIRA URL OR KEY (optional)>")
     out = out.replace("<FIGMA URL (optional)>", figma_url or "<FIGMA URL (optional)>")
@@ -276,7 +276,7 @@ def main() -> None:
     parser.add_argument("--date", default=None, help="YYYY-MM-DD (defaults to today).")
     parser.add_argument("--out-root", default="test-jams", help="Root output directory (default: test-jams).")
 
-    parser.add_argument("--repo", required=True, help="Repository org/repo, e.g. org/project")
+    parser.add_argument("--repo", required=True, help="Repository nova-corp/helix-api, e.g. nova-corp/helix-api")
     parser.add_argument("--prd-url", required=True, help="PRD URL")
     parser.add_argument("--prd-title", default=None, help="Optional PRD title for the template header")
     parser.add_argument("--jira", default=None, help="Optional Jira URL or key (e.g. TESTING-1518)")

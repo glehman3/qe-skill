@@ -5,7 +5,7 @@ Google Sheets must not block the agent: see SYNC_INSTRUCTIONS.
 
 Usage (for AI agent):
     1. Call log_invocation() to write to local log
-    2. Do not call user-DAST-Orch sheets_append during /qforge (can hang indefinitely)
+    2. Do not call user-atlassian-mcp sheets_append during /qforge (can hang indefinitely)
     3. Optional: user-google-drive-mcp sheets_append, or CLI export — see SYNC_INSTRUCTIONS
 
 CLI (manual / non-blocking sync):
@@ -168,7 +168,7 @@ def format_for_sheets(entries: list[dict]) -> list[list[str]]:
 SYNC_INSTRUCTIONS = """
 To sync pending metrics to Google Sheets (without hanging the session):
 
-**Do not** call user-DAST-Orch `sheets_append` during /qforge. That MCP tool can block
+**Do not** call user-atlassian-mcp `sheets_append` during /qforge. That MCP tool can block
 indefinitely (no client-side timeout while waiting on Google APIs / auth).
 
 Preferred options (pick one):

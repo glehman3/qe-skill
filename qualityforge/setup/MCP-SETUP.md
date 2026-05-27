@@ -6,13 +6,13 @@ This guide helps you configure the MCP servers required by QualityForge in Curso
 
 ---
 
-## ☁️ Already Have Cloud Workspace?
+## ☁️ Already Have Cursor Cloud?
 
-**If you already have Cloud Workspace set up, you may not need manual MCP configuration!**
+**If you already have Cursor Cloud set up, you may not need manual MCP configuration!**
 
 Simply:
 1. Open Cursor **Settings → Tools & MCP's**
-2. Enable **DAST-Orch** (includes GitHub MCP)
+2. Enable **Atlassian MCP bundle** (includes GitHub MCP)
 3. Start using `/qforge` or `/testjam` immediately!
 
 ---
@@ -381,7 +381,7 @@ For enterprise MCP deployments:
 - **Sharing with team**: Share the Google Sheet URL with participants
 
 ### Need Immediate Help?
-- Reach out in **#mcqa** Slack channel
+- Reach out in **#qa-engineering** Slack channel
 - File an issue in this repository
 - Contact the QA team
 

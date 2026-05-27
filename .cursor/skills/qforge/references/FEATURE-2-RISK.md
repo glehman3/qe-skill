@@ -17,8 +17,8 @@ Key rules:
 
 ## MCP Requirements (Feature 2)
 
-- **Required**: DAST-Orch (GitHub) - codebase search/mapping
-- **Optional**: DAST-Orch (Jira) - ticket details
+- **Required**: Atlassian MCP bundle (GitHub) - codebase search/mapping
+- **Optional**: Atlassian MCP bundle (Jira) - ticket details
 - **Optional**: Google Drive MCP - Docs/Sheets access
 
 If optional MCPs are not available, continue with user-provided text/attachments and clearly note the limitation in the report.
@@ -31,7 +31,7 @@ Order matters: **verify required MCP first** so we don't waste time collecting i
 
 - Confirm **GitHub MCP is available** (required for code touch points).
   - If missing: show setup instructions and STOP.
-- Check optional MCPs (DAST-Orch Jira, Google Drive). If DAST-Orch Jira available, verify with `jira_search_issues`. If missing, continue with message: "Continuing without Jira integration - please paste ticket content manually."
+- Check optional MCPs (Atlassian MCP bundle Jira, Google Drive). If Atlassian MCP bundle Jira available, verify with `jira_search_issues`. If missing, continue with message: "Continuing without Jira integration - please paste ticket content manually."
 
 ### Step 1: Welcome + Input Collection (streamlined)
 
@@ -47,10 +47,10 @@ Please paste ONE block containing:
 REQUIRED:
 1) PRD URL
 2) PRD full content (full text)
-3) Repository (org/repo), e.g. org/project
+3) Repository (nova-corp/helix-api), e.g. nova-corp/helix-api
 
 OPTIONAL (recommended):
-4) Jira ticket URL or key (e.g., TXPLAT-1234, TESTING-1518)
+4) Jira ticket URL or key (e.g., HELIX-1234, TESTING-1518)
 5) Figma file URL
 6) Any specific concerns (performance, security, rollout, migrations, etc.)
 
@@ -67,7 +67,7 @@ OPTIONAL (streamlining):
 Implementation guidance:
 - Parse PRD content into:
   - goals, user stories, acceptance criteria, constraints, success metrics
-- If DAST-Orch Jira is available and a ticket is provided:
+- If Atlassian MCP bundle Jira is available and a ticket is provided:
   - Call `jira_search_issues` with issueKeys to fetch ticket details
   - Or use `get_issue` (requires `eiam_login` auth) for full details
   - Extract description, ACs, comments (include links)
@@ -163,8 +163,8 @@ python3 qualityforge/risk/generate_risk_docx.py test-jams/{YYYY-MM-DD}_{feature-
 - `test_coverage_map.docx` - Test case coverage mapping (if test_coverage_map.md exists)
 
 **Branding Applied**:
-- **Font**: Avenir Next For company (company brand font)
-- **Colors**: Peppercorn (#241C15) for headers, white text on dark table headers
+- **Font**: Helvetica Neue (brand font)
+- **Colors**: Header Dark (#241C15) for headers, white text on dark table headers
 - **Tables**: Native Word tables with proper borders and styling
 
 **Why DOCX instead of HTML/PDF**:

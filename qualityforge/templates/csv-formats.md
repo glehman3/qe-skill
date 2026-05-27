@@ -25,7 +25,7 @@ Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test
 
 **Example Row** (note: in actual CSV, use newlines between numbered items - shown as `\n` below):
 ```csv
-TC-001,Functional Testing,[mctx/messaging-app] [TXPLAT-3858] SMS Send Success Flow,P0,Manual,SMS Service,Verify SMS can be sent successfully,"1. User is logged in\n2. SMS credits available\n3. Valid phone number","1. Navigate to SMS dashboard\n2. Click 'Send SMS'\n3. Enter valid phone number\n4. Enter message text\n5. Click 'Send'","1. SMS is sent successfully\n2. Confirmation message appears\n3. Credit balance decrements",,,,,
+TC-001,Functional Testing,[nova-corp/helix-api] [HELIX-2847] SMS Send Success Flow,P0,Manual,SMS Service,Verify SMS can be sent successfully,"1. User is logged in\n2. SMS credits available\n3. Valid phone number","1. Navigate to SMS dashboard\n2. Click 'Send SMS'\n3. Enter valid phone number\n4. Enter message text\n5. Click 'Send'","1. SMS is sent successfully\n2. Confirmation message appears\n3. Credit balance decrements",,,,,
 ```
 
 **How it displays in Excel/Sheets:**
@@ -74,7 +74,7 @@ Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test
 
 **Example Row** (note: in actual CSV, use newlines between numbered items - shown as `\n` below):
 ```csv
-TC-001,Functional Testing,[mctx/messaging-app] [TXPLAT-3858] SMS Send Success Flow,P0,Manual,SMS Service,Verify SMS can be sent successfully,"1. User is logged in\n2. SMS credits available","1. Navigate to SMS dashboard\n2. Click 'Send SMS'\n3. Enter details\n4. Click 'Send'","1. SMS sent successfully\n2. Confirmation appears",Can Be Automated,See Mabl test: SMS-SEND-001,,,,
+TC-001,Functional Testing,[nova-corp/helix-api] [HELIX-2847] SMS Send Success Flow,P0,Manual,SMS Service,Verify SMS can be sent successfully,"1. User is logged in\n2. SMS credits available","1. Navigate to SMS dashboard\n2. Click 'Send SMS'\n3. Enter details\n4. Click 'Send'","1. SMS sent successfully\n2. Confirmation appears",Can Be Automated,See Mabl test: SMS-SEND-001,,,,
 ```
 
 ---
@@ -93,7 +93,7 @@ Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test
 
 **Example Row** (note: in actual CSV, use newlines between numbered items - shown as `\n` below):
 ```csv
-TC-001,Functional Testing,[PRD: SMS Scheduling] [User Stories] Verify user can schedule SMS,P0,Manual,SMS Service,Test scheduling feature from PRD user stories,"1. User logged in\n2. SMS credits available","1. Navigate to SMS dashboard\n2. Click 'Schedule SMS'\n3. Select future date/time\n4. Enter details\n5. Click 'Schedule'","1. SMS scheduled for future delivery\n2. Scheduled time displayed\n3. Confirmation message shown",PRD: SMS Scheduling | Section: User Stories | URL: https://confluence.example.com/display/MAIL/SMS-Scheduling,,,,,
+TC-001,Functional Testing,[PRD: SMS Scheduling] [User Stories] Verify user can schedule SMS,P0,Manual,SMS Service,Test scheduling feature from PRD user stories,"1. User logged in\n2. SMS credits available","1. Navigate to SMS dashboard\n2. Click 'Schedule SMS'\n3. Select future date/time\n4. Enter details\n5. Click 'Schedule'","1. SMS scheduled for future delivery\n2. Scheduled time displayed\n3. Confirmation message shown",PRD: SMS Scheduling | Section: User Stories | URL: https://confluence.example.com/display/HELIX/SMS-Scheduling,,,,,
 ```
 
 ---
@@ -119,13 +119,13 @@ Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test
 
 **CSV Header**:
 ```csv
-Test Case ID,Account Purpose,Shard,Creation Date,Creation Time,Manually Activate,Entry Point,Optimizely Experimental,Email,Username,Password,First Name,Last Name,Address,Address 2,City,State,Zipcode,Country,Sending Domain,Company Name,Company Domain,Feature Flags,Marketing Plan,Account Status,Created By,Date Created,Notes
+Test Case ID,Account Purpose,Shard,Creation Date,Creation Time,Manual Activation,Entry Point,A/B Test Experimental,Email,Username,Password,First Name,Last Name,Address,Address 2,City,State,Zipcode,Country,Sending Domain,Company Name,Company Domain,Feature Flags,Subscription Plan,Account Status,Created By,Date Created,Notes
 ```
 
 **Example Rows**:
 ```csv
-TC-001,SMS Send Success Testing,us1,12/19/2025,02:00 PM,No,Default,Off,qa_automation+sms_test@example.com,automation_platform_sms01,Generated123!,QA,Tester,405 N Angier Ave NE,,Atlanta,GA,30308,USA,example.com,QA SMS Testing,https://example.com,feature_sms_enabled,Essentials (500 contacts) + SMS add-on,Active,John Doe,12/19/2025,SMS requires paid plan (Essentials minimum) with SMS add-on purchased separately
-TC-002,Email Campaign Testing,us1,12/19/2025,02:05 PM,No,Default,Off,qa_automation+email_test@example.com,automation_platform_email01,SecurePass456!,Email,Tester,123 Main St,,San Francisco,CA,94102,USA,example.com,QA Email Testing,https://example.com,,Standard (2500 contacts),Active,Jane Smith,12/19/2025,Standard plan for advanced email features and automation capabilities
+TC-001,SMS Send Success Testing,us-east,12/19/2025,02:00 PM,No,Default,Off,qa.test+sms_test@example.com,test_account_sms01,Generated123!,QA,Tester,405 N Angier Ave NE,,Atlanta,GA,30308,USA,example.com,QA SMS Testing,https://example.com,feature_sms_enabled,Basic (500 seats) + messaging add-on,Active,John Doe,12/19/2025,SMS requires paid plan (Basic minimum) with messaging add-on purchased separately
+TC-002,Email Campaign Testing,us-east,12/19/2025,02:05 PM,No,Default,Off,qa.test+email_test@example.com,test_account_email01,SecurePass456!,Email,Tester,123 Main St,,San Francisco,CA,94102,USA,example.com,QA Email Testing,https://example.com,,Pro (2500 seats),Active,Jane Smith,12/19/2025,Pro plan for advanced email features and automation capabilities
 ```
 
 ### Test Account Column Definitions
@@ -134,14 +134,14 @@ TC-002,Email Campaign Testing,us1,12/19/2025,02:05 PM,No,Default,Off,qa_automati
 |--------|-------------|----------|---------|
 | **Test Case ID** | Links to test case requiring this account | Yes | `TC-001` |
 | **Account Purpose** | What this account will be used for | Yes | `SMS Send Success Testing` |
-| **Shard** | Server shard for account creation | Yes | `us1`, `us2`, `us3` |
+| **Region** | Server shard for account creation | Yes | `us-east`, `us-west`, `eu-west` |
 | **Creation Date** | Date to create account | Yes | `12/19/2025` |
 | **Creation Time** | Time to create account | Yes | `02:00 PM` |
-| **Manually Activate** | Whether manual activation needed | Yes | `Yes`, `No` |
-| **Entry Point** | Account entry point setting | Yes | `Default` |
-| **Optimizely Experimental** | Flag for Optimizely experiments | Yes | `On`, `Off` |
-| **Email** | Login email address | Yes | `qa_automation+test@example.com` |
-| **Username** | Account username | Yes | `automation_platform_sms01` |
+| **Manual Activation** | Whether manual activation needed | Yes | `Yes`, `No` |
+| **Signup Source** | Account entry point setting | Yes | `Default` |
+| **A/B Test Experimental** | Flag for A/B test experiments | Yes | `On`, `Off` |
+| **Email** | Login email address | Yes | `qa.test+test@example.com` |
+| **Username** | Account username | Yes | `test_account_sms01` |
 | **Password** | Account password | Yes | `Generated123!` |
 | **First Name** | Account holder first name | Yes | `QA` |
 | **Last Name** | Account holder last name | Yes | `Tester` |
@@ -155,7 +155,7 @@ TC-002,Email Campaign Testing,us1,12/19/2025,02:05 PM,No,Default,Off,qa_automati
 | **Company Name** | Company/organization name | Yes | `QA SMS Testing` |
 | **Company Domain** | Company website URL | Yes | `https://example.com` |
 | **Feature Flags** | Comma-separated feature flags | No | `feature_sms_enabled, feature_api_v3` |
-| **Marketing Plan** | Initial marketing plan tier | Yes | `Essentials (500 contacts) + SMS add-on`<br>⚠️ **Must match feature requirements!** |
+| **Subscription Plan** | Initial subscription plan tier | Yes | `Basic (500 seats) + messaging add-on`<br>⚠️ **Must match feature requirements!** |
 | **Account Status** | Current account status | No | `Active`, `Pending`, `Created` |
 | **Created By** | Person who created account | No | `John Doe` |
 | **Date Created** | Actual creation date | No | `12/19/2025` |
@@ -178,9 +178,9 @@ TC-002,Email Campaign Testing,us1,12/19/2025,02:05 PM,No,Default,Off,qa_automati
 - **Feature Flags**: Only include flags actually needed for the test
 - **Password Security**: Store passwords securely; change after test jam
 - **Account Cleanup**: Document account cleanup process after testing
-- **⚠️ Marketing Plan Validation**: ALWAYS verify plan supports features being tested
+- **⚠️ Subscription Plan Validation**: ALWAYS verify plan supports features being tested
   - See [feature-to-plan-mapping.md](./feature-to-plan-mapping.md) for complete matrix
-  - Common mistakes: Free plan for SMS, Essentials for automation
+  - Common mistakes: Starter plan for SMS, Basic for automation
   - Document plan selection rationale in Notes column
 
 ### File Naming Convention
@@ -195,31 +195,31 @@ Link test accounts to test cases via **Test Case ID** column:
 - Pre-conditions in test case CSV can reference: "Use account TC-001"
 - Ensures traceability between accounts and tests
 
-### ⚠️ Marketing Plan Validation (CRITICAL)
+### ⚠️ Subscription Plan Validation (CRITICAL)
 
-**Before generating test account CSV, validate Marketing Plan selection:**
+**Before generating test account CSV, validate Subscription Plan selection:**
 
 | Feature Being Tested | Minimum Required Plan | Add-ons Needed |
 |---------------------|----------------------|----------------|
-| SMS (text messages) | Essentials | + SMS add-on |
-| MMS (picture messages) | Standard | + SMS add-on |
-| Marketing Automation | Standard | None |
-| AI Features (AI Assistant) | Standard | None |
-| Predictive Segmentation | Standard | None |
-| A/B Testing (2 variants) | Essentials | None |
-| Custom HTML Templates | Premium | None |
+| SMS (text messages) | Basic | + messaging add-on |
+| MMS (picture messages) | Pro | + messaging add-on |
+| Marketing Automation | Pro | None |
+| AI Features (AI Assistant) | Pro | None |
+| Predictive Segmentation | Pro | None |
+| A/B Testing (2 variants) | Basic | None |
+| Custom HTML Templates | Enterprise | None |
 | Basic Email | Free | None |
 
 **Common Mistakes to Avoid:**
-- ❌ Free plan for SMS testing → Use Essentials+ with SMS add-on
-- ❌ Essentials for marketing automation → Use Standard+
-- ❌ Essentials for MMS → Use Standard+
-- ❌ Missing "+ SMS add-on" notation → Document add-ons in plan or notes
+- ❌ Starter plan for SMS testing → Use Basic+ with messaging add-on
+- ❌ Basic for marketing automation → Use Pro+
+- ❌ Basic for MMS → Use Pro+
+- ❌ Missing "+ messaging add-on" notation → Document add-ons in plan or notes
 
 **Validation Process:**
 1. Extract feature names from PR/PRD/test case
 2. Look up minimum plan in [feature-to-plan-mapping.md](./feature-to-plan-mapping.md)
-3. Set Marketing Plan column to required tier
+3. Set Subscription Plan column to required tier
 4. Add "+ [add-on name]" if needed
 5. Document rationale in Notes column
 
@@ -235,7 +235,7 @@ Link test accounts to test cases via **Test Case ID** column:
 |--------|-------------|---------|
 | **Test ID** | Unique identifier | `TC-001`, `TC-002` |
 | **Category** | Test category type | `Functional Testing`, `UI/UX Testing` |
-| **Test Name** | Descriptive test name with context | `[org/repo] [TICKET-ID] Test Name` |
+| **Test Name** | Descriptive test name with context | `[nova-corp/helix-api] [TICKET-ID] Test Name` |
 | **Priority** | Test priority level | `P0`, `P1`, `P2`, `P3` |
 | **Type** | Test execution type | `Manual`, `Automated`, `Manual + Automated` |
 | **Component** | Component being tested | `SMS Service`, `Payment Gateway` |
@@ -269,12 +269,12 @@ Link test accounts to test cases via **Test Case ID** column:
 
 All test names should follow this format to enable traceability:
 
-**Format**: `[repo-org/repo-name] [TICKET-ID] Test Case Name`
+**Format**: `[nova-corp/helix-api] [TICKET-ID] Test Case Name`
 
 ### Examples:
-- `[mctx/messaging-app] [TXPLAT-3858] SMS Send Success Flow`
-- `[org/sms-service] [MUL-4978] SMS Dashboard Display - Chrome`
-- `[org/project] [TXPLAT-3511] SMS Click Event Webhook`
+- `[nova-corp/helix-api] [HELIX-2847] SMS Send Success Flow`
+- `[nova-corp/notify-service] [HELIX-4103] SMS Dashboard Display - Chrome`
+- `[nova-corp/helix-api] [HELIX-3192] SMS Click Event Webhook`
 
 ### For PRD-based Tests:
 **Format**: `[PRD: PRD-Title] [Section-Name] Test Case Description`
@@ -286,13 +286,13 @@ All test names should follow this format to enable traceability:
 ### Extracting PR Context:
 
 1. **Repository**: Extract from PR URL
-   - From: `https://github.com/org/messaging-app/pull/123`
-   - Extract: `[mctx/messaging-app]`
+   - From: `https://github.com/nova-corp/helix-api/pull/123`
+   - Extract: `[nova-corp/helix-api]`
 
 2. **Ticket ID**: Extract from PR title or description
-   - Look for patterns: `TXPLAT-####`, `MUL-####`, `MCVULN-####`
-   - From PR title: "TXPLAT-3858: Add SMS webhook support"
-   - Extract: `[TXPLAT-3858]`
+   - Look for patterns: `HELIX-####`, `HELIX-####`, `SEC-####`
+   - From PR title: "HELIX-2847: Add SMS webhook support"
+   - Extract: `[HELIX-2847]`
    - If no ticket found, use: `[NO-TICKET]`
 
 ---

@@ -16,19 +16,19 @@ Import existing test cases from documents (Google Sheets, Google Docs, or PDF) i
 
 ### Step 1: Check Jira MCP (REQUIRED)
 
-Attempt to verify Jira access using DAST-Orch MCP:
+Attempt to verify Jira access using Atlassian MCP bundle MCP:
 ```
-Call: user-DAST-Orch-get_jira_user_info
+Call: user-atlassian-mcp-get_jira_user_info
 ```
 
 - **If unavailable or error**: Display setup instructions and STOP
   ```
   ❌ Jira MCP not available
   
-  Test case import requires Jira access via DAST-Orch MCP.
+  Test case import requires Jira access via Atlassian MCP bundle MCP.
   
   Please ensure:
-  1. DAST-Orch MCP is configured in Cursor
+  1. Atlassian MCP bundle MCP is configured in Cursor
   2. You have authenticated with your SSO credentials
   
   Run /qforge again after setup is complete.
@@ -262,7 +262,7 @@ How would you like to filter?
 🎯 Jira Project Configuration
 
 What Jira project should these test cases be created in?
-Example: EEE, TXPLAT, TESTING
+Example: HELIX, PROJ, TESTING
 
 👉 Project key:
 ```
@@ -270,7 +270,7 @@ Example: EEE, TXPLAT, TESTING
 After receiving project key, verify it exists:
 ```python
 # Verify project exists
-projects = user-DAST-Orch-jira_search_issues(projectKeys=[project_key], maxResults=1)
+projects = user-atlassian-mcp-jira_search_issues(projectKeys=[project_key], maxResults=1)
 ```
 
 If project found:
@@ -300,12 +300,12 @@ How would you like to organize these test case tickets?
 
 #### Option A: Existing Epic
 ```
-👉 Enter the existing epic key (e.g., EEE-10332):
+👉 Enter the existing epic key (e.g., HELIX-10332):
 ```
 
 Verify the epic exists:
 ```python
-epic = user-DAST-Orch-jira_search_issues(issueKeys=[epic_key])
+epic = user-atlassian-mcp-jira_search_issues(issueKeys=[epic_key])
 ```
 
 If found, display confirmation:
@@ -366,7 +366,7 @@ Who should these test cases be assigned to?
 Verify user exists:
 ```python
 # Verify user exists in Jira
-user = user-DAST-Orch-get_jira_user_info()  # or search for specific user
+user = user-atlassian-mcp-get_jira_user_info()  # or search for specific user
 ```
 
 ```
@@ -478,7 +478,7 @@ For each test case, create a Task ticket:
 
 **Summary**: `[{test_id}] {test_name}`
 
-**Description** (Markdown format - DAST-Orch converts to Jira ADF):
+**Description** (Markdown format - Atlassian MCP bundle converts to Jira ADF):
 ```markdown
 ## Test Case
 {test_id}: {test_name}
@@ -505,7 +505,7 @@ assignment_index = 0
 
 # Create epic first if Option B was selected
 if create_new_epic:
-    epic_result = user-DAST-Orch-jira_create_issue(
+    epic_result = user-atlassian-mcp-jira_create_issue(
         projectKey=project_key,
         issueType="Epic",
         summary=epic_name,
@@ -528,7 +528,7 @@ for i, test in enumerate(test_cases):
         assignee = team[assignment_index % len(team)]
         assignment_index += 1
     
-    result = user-DAST-Orch-jira_create_issue(
+    result = user-atlassian-mcp-jira_create_issue(
         projectKey=project_key,
         issueType="Task",
         summary=f"[{test.id}] {test.name}",
@@ -682,8 +682,8 @@ After completion, the feature generates a summary file:
 
 | Ticket | Test ID | Summary | Assignee | Status |
 |--------|---------|---------|----------|--------|
-| EEE-9101 | TC-001 | Verify user login... | glehman | Created |
-| EEE-9102 | TC-002 | Verify password reset... | jdoe | Created |
+| HELIX-9101 | TC-001 | Verify user login... | repo-maintainer | Created |
+| HELIX-9102 | TC-002 | Verify password reset... | jdoe | Created |
 
 ## Statistics
 - Total test cases: {count}

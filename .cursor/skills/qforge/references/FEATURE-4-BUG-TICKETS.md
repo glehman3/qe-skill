@@ -16,19 +16,19 @@ Create Jira bug tickets from completed test results (Google Sheets or PDF export
 
 ### Step 1: Check Jira MCP (REQUIRED)
 
-Attempt to verify Jira access using DAST-Orch MCP:
+Attempt to verify Jira access using Atlassian MCP bundle MCP:
 ```
-Call: user-DAST-Orch-get_jira_user_info
+Call: user-atlassian-mcp-get_jira_user_info
 ```
 
 - **If unavailable or error**: Display setup instructions and STOP
   ```
   ❌ Jira MCP not available
   
-  Bug ticket creation requires Jira access via DAST-Orch MCP.
+  Bug ticket creation requires Jira access via Atlassian MCP bundle MCP.
   
   Please ensure:
-  1. DAST-Orch MCP is configured in Cursor
+  1. Atlassian MCP bundle MCP is configured in Cursor
   2. You have authenticated with your SSO credentials
   
   Run /qforge again after setup is complete.
@@ -223,14 +223,14 @@ All {total} test cases passed. No bug tickets to create.
 🎯 Jira Project Configuration
 
 1. What Jira project should these bugs be created in?
-   Example: EEE, TXPLAT, TESTING
+   Example: HELIX, PROJ, TESTING
    👉 Project key:
 ```
 
 After receiving project key, verify it exists:
 ```python
 # Verify project exists
-projects = user-DAST-Orch-jira_search_issues(projectKeys=[project_key], maxResults=1)
+projects = user-atlassian-mcp-jira_search_issues(projectKeys=[project_key], maxResults=1)
 ```
 
 If project not found, ask to re-enter.
@@ -258,12 +258,12 @@ How would you like to organize these bug tickets?
 
 #### Option A: Existing Epic
 ```
-👉 Enter the existing epic key (e.g., EEE-10332):
+👉 Enter the existing epic key (e.g., HELIX-10332):
 ```
 
 Verify the epic exists:
 ```python
-epic = user-DAST-Orch-jira_search_issues(issueKeys=[epic_key])
+epic = user-atlassian-mcp-jira_search_issues(issueKeys=[epic_key])
 ```
 
 If found, display confirmation:
@@ -354,7 +354,7 @@ For each failed test, create a bug ticket:
 
 **Summary**: `[{test_id}] {test_name_or_objective}`
 
-**Description** (Markdown format - DAST-Orch converts to Jira ADF):
+**Description** (Markdown format - Atlassian MCP bundle converts to Jira ADF):
 ```markdown
 ## Test Case
 {test_id}: {test_name_or_objective}
@@ -387,7 +387,7 @@ created_tickets = []
 
 # Create epic first if Option B was selected
 if create_new_epic:
-    epic_result = user-DAST-Orch-jira_create_issue(
+    epic_result = user-atlassian-mcp-jira_create_issue(
         projectKey=project_key,
         issueType="Epic",
         summary=epic_name,
@@ -399,7 +399,7 @@ if create_new_epic:
 
 # Create each bug ticket
 for test in failed_tests:
-    result = user-DAST-Orch-jira_create_issue(
+    result = user-atlassian-mcp-jira_create_issue(
         projectKey=project_key,
         issueType="Bug",
         summary=f"[{test.id}] {test.name}",
@@ -431,14 +431,14 @@ for test in failed_tests:
 📋 Created Tickets:
 | Ticket | Test ID | Summary |
 |--------|---------|---------|
-| EEE-11500 | TC-001 | User login fails when... |
-| EEE-11501 | TC-015 | Payment processing error... |
-| EEE-11502 | TC-023 | Export button not responding... |
+| HELIX-11500 | TC-001 | User login fails when... |
+| HELIX-11501 | TC-015 | Payment processing error... |
+| HELIX-11502 | TC-023 | Export button not responding... |
 
 🔗 Links for Slack/Docs:
-- [EEE-11500](https://jira.example.com/browse/EEE-11500) - User login fails when...
-- [EEE-11501](https://jira.example.com/browse/EEE-11501) - Payment processing error...
-- [EEE-11502](https://jira.example.com/browse/EEE-11502) - Export button not responding...
+- [HELIX-11500](https://jira.example.com/browse/HELIX-11500) - User login fails when...
+- [HELIX-11501](https://jira.example.com/browse/HELIX-11501) - Payment processing error...
+- [HELIX-11502](https://jira.example.com/browse/HELIX-11502) - Export button not responding...
 
 {if epic_key}
 📁 Epic: [{epic_key}](https://jira.example.com/browse/{epic_key})
@@ -527,8 +527,8 @@ After completion, the feature generates a summary file:
 
 | Ticket | Test ID | Summary | Status |
 |--------|---------|---------|--------|
-| EEE-11500 | TC-001 | User login fails... | Created |
-| EEE-11501 | TC-015 | Payment processing... | Created |
+| HELIX-11500 | TC-001 | User login fails... | Created |
+| HELIX-11501 | TC-015 | Payment processing... | Created |
 
 ## Statistics
 - Total failed tests: {count}

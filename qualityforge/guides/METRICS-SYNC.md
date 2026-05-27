@@ -13,12 +13,12 @@ QualityForge logs `/qforge` invocations to `qualityforge/metrics.log` (JSONL). O
 
 1. **No client-side timeout** — MCP tool calls wait for the server to respond. If the Google Sheets request inside the MCP server blocks (network, DNS, proxy, or waiting on token refresh), the whole call blocks.
 2. **Authentication / consent** — First-time or expired Google OAuth can stall until a browser flow completes; in headless or agent context that may never finish.
-3. **Wrong MCP server** — `user-DAST-Orch` bundles many tools; its Sheets path may behave differently than a dedicated Google Drive MCP.
+3. **Wrong MCP server** — `user-atlassian-mcp` bundles many tools; its Sheets path may behave differently than a dedicated Google Drive MCP.
 
 ### Recommended workflow (avoids hangs)
 
 1. **Always** rely on `metrics.log` as the source of truth (local-first).
-2. During **`/qforge`**, agents should **not** call `user-DAST-Orch` `sheets_append` (known to block indefinitely in some environments).
+2. During **`/qforge`**, agents should **not** call `user-atlassian-mcp` `sheets_append` (known to block indefinitely in some environments).
 3. Prefer **`user-google-drive-mcp`** `sheets_append` when that server is enabled and you need automated append.
 4. **Manual, non-blocking sync** — Export rows in the terminal, paste into Sheets, then mark synced:
 
@@ -46,6 +46,6 @@ Use exact `timestamp` values from `metrics.log` or from the export output.
 - **Spreadsheet ID** (from URL): `15Px9z6MBG8b5o6dZcRaLO-cnaG61LNcdbbxiAaDu_-o`
 - **Sheet name**: `Invocations`
 
-### If you maintain the DAST-Orch MCP server
+### If you maintain the Atlassian MCP bundle MCP server
 
 A durable fix is server-side: enforce **HTTP timeouts** on all Google API calls, fail fast with a clear error, and avoid blocking the MCP response on interactive OAuth during agent sessions.

@@ -278,7 +278,7 @@ Home → [Section] → [Subsection] → [Action]
 **Solution**:
 - [To be documented]
 - Verify account was created successfully
-- Check correct shard/environment
+- Check correct region/environment
 - Try searching by different fields (email, username, ID)
 - Confirm account activation status
 
@@ -304,7 +304,7 @@ Home → [Section] → [Subsection] → [Action]
 
 ## Examples
 
-### Example 1: Setting MRR for Premium Test Case
+### Example 1: Setting MRR for Enterprise Test Case
 
 > **Status**: 🚧 To be documented with screenshots/detailed steps
 

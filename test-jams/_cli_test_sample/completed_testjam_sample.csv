@@ -1,36 +1,36 @@
 ID,Component,Objective,Conditions,Steps to Test,Expected Results,Tester,Testing Evidence,Results,Notes,Bug ID
 UI-001,Templates Page,Verify transactional templates are displayed in the saved templates list,"1. User is logged in with messaging integration
 2. User has transactional templates
-3. Experiment mctx_streamlined_tx_template_management is enabled (variation_1)
+3. Experiment feature_streamlined_template_management is enabled (variation_1)
 4. Navigate to /templates?tab=saved","1. Navigate to Email templates page (/templates?tab=saved)
 2. Observe template list
 3. Identify templates marked as transactional","1. Transactional templates are visible in the list
 2. Transactional templates have visual indicator/badge
-3. Templates show correct status (draft/published)",Gregory Lehman,https://screenshot.example.com/ui001.png,PASS,,
+3. Templates show correct status (draft/published)",Alex Morgan,https://screenshot.example.com/ui001.png,PASS,,
 UI-002,Templates Page,Verify format and status columns display correctly for transactional templates,"1. User has transactional templates
 2. Experiment is enabled
 3. Navigate to saved templates tab","1. Navigate to /templates?tab=saved
 2. Observe table columns
 3. Check format and status for transactional templates","1. Format column shows 'Transactional' for tx templates
 2. Status column shows 'Draft' or 'Published'
-3. Columns are sortable/filterable",Gregory Lehman,,PASS,,
+3. Columns are sortable/filterable",Alex Morgan,,PASS,,
 UI-003,Templates Page,Verify dedicated Transactional section/filter exists on templates page,"1. User has messaging integration
 2. Experiment is enabled
 3. Navigate to templates page","1. Navigate to /templates
 2. Look for Transactional filter/tab/section
 3. Click on Transactional filter","1. Transactional filter/section is visible
 2. Clicking filter shows only transactional templates
-3. Marketing templates are hidden when filter is active",Andre Pardue,,FAIL,Filter was not visible on the templates page. Appears to be missing from the UI.,
+3. Marketing templates are hidden when filter is active",Casey Reed,,FAIL,Filter was not visible on the templates page. Appears to be missing from the UI.,
 UI-004,Templates Page,Verify Transactional status filter works in Saved templates tab,"1. User has mix of marketing and transactional templates
 2. Experiment is enabled","1. Navigate to /templates?tab=saved
 2. Locate Transactional status filter
 3. Apply filter
 4. Verify results","1. Transactional status filter is present
 2. Filter options include transactional statuses
-3. Applying filter shows correct subset of templates",Andre Pardue,https://screenshot.example.com/ui004_fail.png,FAILED,"Filter dropdown shows incorrect options - missing 'Draft' and 'Published' states",
+3. Applying filter shows correct subset of templates",Casey Reed,https://screenshot.example.com/ui004_fail.png,FAILED,"Filter dropdown shows incorrect options - missing 'Draft' and 'Published' states",
 UI-005,Template Creation,Verify user can create transactional template from pre-built templates,"1. User has messaging integration
 2. Experiment is enabled
-3. Navigate to Acme Platform templates tab (/templates?tab=mc)","1. Navigate to /templates?tab=mc
+3. Navigate to Helix Platform templates tab (/templates?tab=mc)","1. Navigate to /templates?tab=mc
 2. Select 'Transactional' tag from TagBar
 3. Hover over a transactional template option
 4. Click 'Create template'","1. Pre-built transactional templates are displayed
@@ -49,14 +49,14 @@ UI-007,Nuni Editor,Verify 'Change template' button is hidden when editing transa
 2. Click on 'Save and exit' combo button dropdown
 3. Look for 'Change template' option","1. 'Save and exit' dropdown appears
 2. 'Change template' option is NOT present
-3. Other options (Save, Save and exit) remain available",John Healy,,FAIL,"'Change template' option IS visible in dropdown - should be hidden for transactional templates",
+3. Other options (Save, Save and exit) remain available",Jordan Blake,,FAIL,"'Change template' option IS visible in dropdown - should be hidden for transactional templates",
 UI-008,Nuni Editor,Verify 'Change template' button IS visible for marketing (non-transactional) templates,"1. User has marketing template
 2. Experiment is enabled
 3. Template is NOT transactional","1. Open marketing template in Nuni editor
 2. Click on 'Save and exit' combo button dropdown
 3. Look for 'Change template' option","1. 'Save and exit' dropdown appears
 2. 'Change template' option IS present
-3. Marketing template editing is not affected",John Healy,,PASS,,
+3. Marketing template editing is not affected",Jordan Blake,,PASS,,
 UI-009,Template Preview,Verify 'Changes not published' overlay appears for draft transactional templates,"1. Transactional template has unsaved/unpublished changes
 2. Template was previously published","1. Make changes to published transactional template
 2. Preview the template
@@ -110,12 +110,12 @@ A11Y-001,Templates Page,Verify templates page is fully keyboard navigable,"1. Na
 4. Navigate transactional filter via keyboard","1. All interactive elements are reachable via Tab
 2. Focus indicators are clearly visible
 3. Enter/Space activates buttons and links
-4. Escape closes modals/dropdowns",Gregory Lehman,,FAIL,Focus indicators not visible on several interactive elements. Tab order skips the filter dropdown.,
-A11Y-002,Templates Page,Verify transactional filter is accessible via screen reader (Note: Gregory Lehman will do this),"1. Screen reader is enabled (VoiceOver/NVDA)
+4. Escape closes modals/dropdowns",Alex Morgan,,FAIL,Focus indicators not visible on several interactive elements. Tab order skips the filter dropdown.,
+A11Y-002,Templates Page,Verify transactional filter is accessible via screen reader (Note: Alex Morgan will do this),"1. Screen reader is enabled (VoiceOver/NVDA)
 2. Navigate to templates page","1. Navigate to transactional filter using screen reader
 2. Listen to announcements
 3. Activate filter
 4. Verify results are announced","1. Filter has accessible name/label
 2. Filter state (selected/not selected) is announced
 3. Template count is announced after filtering
-4. Results are navigable via screen reader",Gregory Lehman,https://www.loom.com/share/accessibility-test-video,FAIL,Filter has no accessible label. Screen reader announces 'button' with no context. State changes are not announced.,EEE-11500
+4. Results are navigable via screen reader",Alex Morgan,https://www.loom.com/share/accessibility-test-video,FAIL,Filter has no accessible label. Screen reader announces 'button' with no context. State changes are not announced.,HELIX-11500

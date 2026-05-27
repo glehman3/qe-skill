@@ -7,17 +7,17 @@
 
 ## Overview
 
-This test jam focuses on validating the new SMS sending functionality recently added to the Acme Platform platform. The implementation includes API endpoints for SMS sending, dashboard components for SMS management, and integration with existing CRM functionality.
+This test jam focuses on validating the new SMS sending functionality recently added to the Helix Platform. The implementation includes API endpoints for SMS sending, dashboard components for SMS management, and integration with existing CRM functionality.
 
 ## PR's/Changes Included
 
 1. **PR #12345** - Add SMS API endpoints
-   - Link: https://github.com/org/project/pull/12345
+   - Link: https://github.com/nova-corp/helix-api/pull/12345
    - Labels: `high-priority`, `P1`, `new-feature`
    - Areas affected: API layer, authentication, quota management
    
 2. **PR #12346** - SMS Dashboard UI Components
-   - Link: https://github.com/org/project/pull/12346
+   - Link: https://github.com/nova-corp/helix-api/pull/12346
    - Labels: `UI`, `P2`
    - Areas affected: Frontend dashboard, responsive design
 
@@ -133,7 +133,7 @@ This test jam will be considered successful if:
 - **Credits**: Staging accounts have limited SMS credits. Coordinate with team if you need more.
 
 ### Known Issues (Not requiring re-test):
-- Minor styling inconsistency in SMS meter (ticket MUL-5000)
+- Minor styling inconsistency in SMS meter (ticket HELIX-4156)
 - Occasional slow loading in Firefox (performance ticket filed)
 
 ### Questions or Blockers?

@@ -46,19 +46,19 @@ Follow the field mapping below to transfer data from your CSV to the test tools 
 
 | Form Field | CSV Column | Instructions |
 |------------|------------|--------------|
-| **Shard** | Shard | Select from dropdown (e.g., `us1`, `us2`) |
+| **Region** | Region | Select from dropdown (e.g., `us-east`, `us-west`) |
 | **Creation Date** | Creation Date | Click date picker, enter date from CSV |
 | **Creation Time** | Creation Time | Click time picker, enter time from CSV |
-| **Manually activate this account?** | Manually Activate | Select radio button: `Yes` or `No`<br>**Recommended**: `No` |
-| **Set Account Entry Point?** | Entry Point | Select from dropdown (usually `Default`) |
-| **Mark account as experimental for Optimizely** | Optimizely Experimental | Toggle switch: `On` or `Off` |
+| **Manual activate this account?** | Manual Activation | Select radio button: `Yes` or `No`<br>**Recommended**: `No` |
+| **Set Account Signup Source?** | Entry Point | Select from dropdown (usually `Default`) |
+| **Mark account as experimental for A/B testing platform** | A/B Test Experimental | Toggle switch: `On` or `Off` |
 
 ### Account Login Info Section
 
 | Form Field | CSV Column | Instructions |
 |------------|------------|--------------|
 | **Email** | Email | Copy/paste email from CSV<br>**Format**: `user+descriptor@example.com` |
-| **Username** | Username | Copy/paste username from CSV<br>**Note**: Must be unique across shard |
+| **Username** | Username | Copy/paste username from CSV<br>**Note**: Must be unique across region |
 | **Password** | Password | Copy/paste password from CSV<br>**Important**: Save this securely! |
 
 > **💡 Tip**: After form submission, Test Tools will auto-generate username/password if fields are left blank. If your CSV has pre-filled values, use those for consistency.
@@ -84,15 +84,15 @@ Follow the field mapping below to transfer data from your CSV to the test tools 
 | Form Field | CSV Column | Instructions |
 |------------|------------|--------------|
 | **Apply Feature Flags** | Feature Flags | Copy/paste feature flag names<br>**Format**: Comma-separated<br>**Example**: `feature_sms_enabled, feature_api_v3` |
-| **Set Marketing Plan** | Marketing Plan | Select from dropdown<br>**Options**: Free, Essentials, Standard, Premium<br>**⚠️ CRITICAL**: Must match feature requirements! See plan validation below. |
+| **Set Subscription Plan** | Subscription Plan | Select from dropdown<br>**Options**: Starter, Basic, Pro, Enterprise<br>**⚠️ CRITICAL**: Must match feature requirements! See plan validation below. |
 
-> **🚨 MARKETING PLAN VALIDATION**: The Marketing Plan MUST support the features being tested or tests will fail!
+> **🚨 SUBSCRIPTION PLAN VALIDATION**: The Subscription Plan MUST support the features being tested or tests will fail!
 > 
 > **Common Requirements:**
-> - **SMS/MMS Testing** → Requires **Essentials+ with SMS add-on** (NOT Free)
-> - **Marketing Automation** → Requires **Standard or Premium** (NOT Free/Essentials)
-> - **AI Features** → Requires **Standard or Premium**
-> - **Basic Email** → Free plan OK
+> - **SMS/MMS Testing** → Requires **Basic+ with messaging add-on** (NOT Starter)
+> - **Marketing Automation** → Requires **Pro or Enterprise** (NOT Starter/Basic)
+> - **AI Features** → Requires **Pro or Enterprise**
+> - **Basic Email** → Starter plan OK
 >
 > See [feature-to-plan-mapping.md](../templates/feature-to-plan-mapping.md) for complete feature-to-plan matrix.
 
@@ -113,9 +113,9 @@ Follow the field mapping below to transfer data from your CSV to the test tools 
 ```csv
 Test Case ID: TC-001
 Account Purpose: SMS Send Success Testing
-Shard: us1
-Email: qa_automation+sms_test@example.com
-Username: automation_platform_sms01
+Region: us1
+Email: qa.test+sms_test@example.com
+Username: test_account_sms01
 Password: Testing123!
 First Name: QA
 Last Name: Tester
@@ -128,24 +128,24 @@ Sending Domain: example.com
 Company Name: QA SMS Testing
 Company Domain: https://example.com
 Feature Flags: feature_sms_enabled
-Marketing Plan: Essentials (500 contacts) + SMS add-on
-Notes: SMS requires paid plan - Essentials is minimum tier with SMS add-on
+Subscription Plan: Basic (500 seats) + messaging add-on
+Notes: SMS requires paid plan - Basic is minimum tier with messaging add-on
 ```
 
 **Steps:**
 
 1. **Open Test Tools**: Navigate to create account page
 2. **Account Configuration**:
-   - Shard: Select `us1`
+   - Region: Select `us-east`
    - Creation Date: Today's date
    - Creation Time: Current time
-   - Manually activate: Select `No`
-   - Entry Point: Select `Default`
-   - Optimizely: Toggle `Off`
+   - Manual activate: Select `No`
+   - Signup Source: Select `Default`
+   - A/B testing platform: Toggle `Off`
 
 3. **Login Info**:
-   - Email: `qa_automation+sms_test@example.com`
-   - Username: `automation_platform_sms01`
+   - Email: `qa.test+sms_test@example.com`
+   - Username: `test_account_sms01`
    - Password: `Testing123!` ⚠️ **Save this password!**
 
 4. **Contact Info**:
@@ -163,8 +163,8 @@ Notes: SMS requires paid plan - Essentials is minimum tier with SMS add-on
 
 5. **Additional Options**:
    - Feature Flags: `feature_sms_enabled`
-   - Marketing Plan: Select `Essentials (500 contacts)` ⚠️ **Not Free! SMS requires paid plan**
-   - **Note**: SMS add-on must be purchased separately after account creation
+   - Subscription Plan: Select `Basic (500 seats)` ⚠️ **Not Free! SMS requires paid plan**
+   - **Note**: messaging add-on must be purchased separately after account creation
 
 6. **Submit**: Click "Submit" button
 
@@ -190,7 +190,7 @@ Notes: SMS requires paid plan - Essentials is minimum tier with SMS add-on
 **Problem**: Username is not unique
 
 **Solution**:
-- Add a number suffix: `automation_platform_sms01` → `automation_platform_sms02`
+- Add a number suffix: `test_account_sms01` → `test_account_sms02`
 - Update CSV with new username
 - Ensure username matches what you'll use in tests
 
@@ -233,17 +233,17 @@ Notes: SMS requires paid plan - Essentials is minimum tier with SMS add-on
 - Use password manager for future accounts
 - Update CSV with actual password used
 
-### ❌ Wrong Marketing Plan Selected
+### ❌ Wrong Subscription Plan Selected
 
-**Problem**: Test fails because feature not available on selected plan (e.g., SMS on Free plan)
+**Problem**: Test fails because feature not available on selected plan (e.g., SMS on Starter plan)
 
 **Solution**:
 - **Check CSV Notes column**: Should explain why plan was chosen
 - **Consult feature mapping**: See [feature-to-plan-mapping.md](../templates/feature-to-plan-mapping.md)
 - **Common mistakes**:
-  - SMS testing requires Essentials+ (NOT Free)
-  - Marketing automation requires Standard+ (NOT Essentials)
-  - MMS requires Standard+ (NOT Essentials)
+  - SMS testing requires Basic+ (NOT Starter)
+  - Marketing automation requires Pro+ (NOT Basic)
+  - MMS requires Pro+ (NOT Basic)
 - **If plan is wrong**: Create new account with correct plan, or upgrade via admin-console
 - **Document**: Note plan issue in test results CSV
 
@@ -254,9 +254,9 @@ Notes: SMS requires paid plan - Essentials is minimum tier with SMS add-on
 **Solution**:
 - SMS is an add-on that must be purchased separately
 - Even with correct plan, SMS credits must be added
-- Apply for SMS add-on through account settings
+- Apply for messaging add-on through account settings
 - Wait for SMS application approval (may take time)
-- Document SMS add-on status in CSV notes
+- Document messaging add-on status in CSV notes
 
 ---
 
@@ -265,7 +265,7 @@ Notes: SMS requires paid plan - Essentials is minimum tier with SMS add-on
 ### ✅ Before Creating Accounts
 
 1. **Review Test Cases First**: Understand which accounts you need
-2. **Validate Marketing Plan**: Verify plan supports features being tested (see [feature-to-plan-mapping.md](../templates/feature-to-plan-mapping.md))
+2. **Validate Subscription Plan**: Verify plan supports features being tested (see [feature-to-plan-mapping.md](../templates/feature-to-plan-mapping.md))
 3. **Check for Existing Accounts**: Avoid duplicates
 4. **Prepare Password Storage**: Have secure location ready
 5. **Verify VPN Connection**: Ensure network access
@@ -302,7 +302,7 @@ After creating an account, verify it's ready for testing:
 - [ ] Login credentials saved securely
 - [ ] Can log in to account via web UI
 - [ ] Feature flags are enabled (if applicable)
-- [ ] Marketing plan is correct
+- [ ] Subscription plan is correct
 - [ ] Account has necessary credits/resources
 - [ ] CSV updated with creation details
 - [ ] Team notified account is ready
@@ -316,7 +316,7 @@ After creating an account, verify it's ready for testing:
 **Required Fields** (cannot be blank):
 - Shard
 - Creation Date & Time
-- Manually Activate selection
+- Manual Activation selection
 - Entry Point
 - Email
 - Username
@@ -331,18 +331,18 @@ After creating an account, verify it's ready for testing:
 - Sending Domain
 - Company Name
 - Company Domain
-- Marketing Plan
+- Subscription Plan
 
 **Optional Fields**:
 - Address 2
-- Optimizely Experimental flag
+- A/B Test Experimental flag
 - Feature Flags
 
 ---
 
-## Marketing Plan Validation Guide
+## Subscription Plan Validation Guide
 
-> **🚨 CRITICAL**: Always verify the Marketing Plan matches the features being tested!
+> **🚨 CRITICAL**: Always verify the Subscription Plan matches the features being tested!
 
 ### Quick Validation Steps
 
@@ -350,36 +350,36 @@ Before creating ANY test account:
 
 1. **Identify the feature(s)** being tested from the Test Case ID or Account Purpose
 2. **Look up minimum required plan** in [feature-to-plan-mapping.md](../templates/feature-to-plan-mapping.md)
-3. **Verify CSV has correct plan** in Marketing Plan column
+3. **Verify CSV has correct plan** in Subscription Plan column
 4. **Check for add-ons** (especially SMS) that must be purchased separately
 
 ### Common Feature Requirements (Quick Reference)
 
 | If Testing... | Minimum Plan Required |
 |---------------|---------------------|
-| **SMS (text messages)** | Essentials + SMS add-on |
-| **MMS (picture messages)** | Standard + SMS add-on |
-| **Marketing Automation Flows** | Standard |
-| **AI Features (AI Assistant)** | Standard |
-| **Predictive Segmentation** | Standard |
-| **A/B Testing (2 variants)** | Essentials |
-| **Multivariate Testing (3+ variants)** | Premium |
-| **Custom HTML Templates** | Premium |
+| **SMS (text messages)** | Basic + messaging add-on |
+| **MMS (picture messages)** | Pro + messaging add-on |
+| **Marketing Automation Flows** | Pro |
+| **AI Features (AI Assistant)** | Pro |
+| **Predictive Segmentation** | Pro |
+| **A/B Testing (2 variants)** | Basic |
+| **Multivariate Testing (3+ variants)** | Enterprise |
+| **Custom HTML Templates** | Enterprise |
 | **Basic Email Campaigns** | Free |
 
 ### When in Doubt
 
-- **Most features** → Use **Standard** plan (safe middle ground)
-- **SMS/MMS testing** → MUST use **paid plan** (Essentials minimum for SMS, Standard for MMS)
-- **Basic testing only** → Free plan may be OK (check with test coordinator)
+- **Most features** → Use **Pro** plan (safe middle ground)
+- **SMS/MMS testing** → MUST use **paid plan** (Basic minimum for SMS, Pro for MMS)
+- **Basic testing only** → Starter plan may be OK (check with test coordinator)
 
 ### Red Flags 🚩
 
 **STOP and verify if you see:**
-- ❌ SMS testing with Free plan → **WRONG! Needs Essentials+**
-- ❌ MMS testing with Essentials → **WRONG! Needs Standard+**
-- ❌ Automation testing with Essentials → **WRONG! Needs Standard+**
-- ❌ Any paid feature with Free plan → **Double-check requirements!**
+- ❌ SMS testing with Starter plan → **WRONG! Needs Basic+**
+- ❌ MMS testing with Basic → **WRONG! Needs Pro+**
+- ❌ Automation testing with Basic → **WRONG! Needs Pro+**
+- ❌ Any paid feature with Starter plan → **Double-check requirements!**
 
 **See full mapping**: [feature-to-plan-mapping.md](../templates/feature-to-plan-mapping.md)
 
@@ -391,7 +391,7 @@ Before creating ANY test account:
 - **Field Definitions**: See [test_account_fields.md](../templates/test_account_fields.md) for detailed field descriptions
 - **CSV Format**: See [csv-formats.md](../templates/csv-formats.md) for test account CSV structure
 - **CSV Template**: See [test_account_template.csv](../templates/test_account_template.csv) for example
-- **admin-console Guide**: See [Admin Console-NAVIGATION.md](../guides/Admin Console-NAVIGATION.md) for post-creation account modifications
+- **admin-console Guide**: See [MCADMIN-NAVIGATION.md](../guides/MCADMIN-NAVIGATION.md) for post-creation account modifications
 
 ---
 

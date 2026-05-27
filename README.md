@@ -1,11 +1,11 @@
 # Quality Engineering Suite by QE Suite
 
-This repository contains the **Quality Engineering Suite by QE Suite** (powered by **QualityForge**) — a comprehensive Quality Engineering Suite for test case generation, risk analysis, and automation for org/project workflows.
+This repository contains the **Quality Engineering Suite by QE Suite** (powered by **QualityForge**) — a comprehensive Quality Engineering Suite for test case generation, risk analysis, and automation for nova-corp/helix-api workflows.
 
 ## 🚀 New to Cursor?
 
 If you haven't set up Cursor yet, follow this guide first:  
-**[Cursor Setup Guide](https://docs.google.com/document/d/1nQbmLhD4ALjHFN6prMjKxPOVUiQfhXOFfHQUvOo1MG0/edit?tab=t.0)**
+**[Cursor Setup Guide](https://docs.cursor.com/get-started/mcp)**
 
 Once Cursor is installed, come back here to set up the **Quality Engineering Suite by QE Suite** (powered by **QualityForge**) and start using `/qforge`.
 
@@ -45,7 +45,7 @@ Comprehensive Quality Engineering Suite with multiple features for building bett
 ## Getting Started
 
 ### Prerequisites
-- **Cursor IDE** - [Setup Guide](https://docs.google.com/document/d/1nQbmLhD4ALjHFN6prMjKxPOVUiQfhXOFfHQUvOo1MG0/edit?tab=t.0) (if you're new to Cursor)
+- **Cursor IDE** - [Setup Guide](https://docs.cursor.com/get-started/mcp) (if you're new to Cursor)
 - Access to GitHub repositories (for MCP integration)
 - Appropriate permissions for target repositories
 
@@ -56,7 +56,7 @@ Comprehensive Quality Engineering Suite with multiple features for building bett
    git clone https://github.com/glehman3/qe-suite.git
    cd qe-suite
    ```
-   **Want to add this to your Cloud Workspace?**:
+   **Want to add this to your Cursor Cloud?**:
    This is coming soon. In the mean time, please clone this repository in a separate Cursor space. 
    
 3. **Restart Cursor** (Important!):
@@ -68,9 +68,9 @@ Comprehensive Quality Engineering Suite with multiple features for building bett
 4. **Configure MCP servers** (GitHub MCP required for `/qforge`):
    
    **Choose your setup path**:
-   - **☁️ Already Have Cloud Workspace?** → No extra MCP setup required!
+   - **☁️ Already Have Cursor Cloud?** → No extra MCP setup required!
      - Go to Cursor **Settings → Tools & MCP's**
-     - Enable **DAST-Orch** (includes GitHub MCP)
+     - Enable **Atlassian MCP bundle** (includes GitHub MCP)
      - Time: 1 minute
    
    - **👋 First Time User?** (Never installed MCPs) → [qualityforge/setup/FIRST-TIME-SETUP.md](./qualityforge/setup/FIRST-TIME-SETUP.md)
@@ -188,7 +188,7 @@ Configure MCP servers in your Cursor settings. See [qualityforge/setup/MCP-SETUP
 **Example - Test Case Generation**:
 - Type: `/qforge`
 - Select: `1` (Test Case/Jam Generation)
-- Provide: `https://github.com/org/project/sms-service/pull/123`
+- Provide: `https://github.com/nova-corp/helix-api/pull/123`
 - Participants: `5`
 - Get: 5 CSV files with test cases + summary report
 
@@ -284,7 +284,7 @@ MIT License - see LICENSE file
 For questions, issues, or contributions:
 - File an issue in this repository
 - Contact the QA team
-- Reach out in #mcqa Slack channel
+- Reach out in #qa-engineering Slack channel
 
 ---
 

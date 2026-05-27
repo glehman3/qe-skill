@@ -1,7 +1,7 @@
 ## Quality Risk Analysis: <FEATURE NAME>
 
 **Generated:** <YYYY-MM-DD>  
-**Repository:** `<org/repo>`  
+**Repository:** `<nova-corp/helix-api>`  
 **PRD:** [<PRD TITLE>](<PRD URL>)  
 **Jira:** <JIRA URL OR KEY (optional)>  
 **Design:** <FIGMA URL (optional)>

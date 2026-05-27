@@ -1,10 +1,10 @@
 # This file defines code owners for the repository
 # Every PR will automatically request review from the code owners
 
-# Global owner - all files require review from glehman
+# Global owner - all files require review from repo-maintainer
 * @glehman3
 
 # You can also specify different owners for different paths:
-# /testjam/ @glehman
-# /test-jams/ @glehman
+# /testjam/ @repo-maintainer
+# /test-jams/ @repo-maintainer
 

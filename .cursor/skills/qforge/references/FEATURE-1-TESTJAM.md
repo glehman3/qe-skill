@@ -111,11 +111,11 @@ To get started, provide **any** of the following (one is enough):
 
 📋 **Pull Request (PR)** (recommended)
 - **PR URL(s)**: one or more PR URLs (comma-separated)
-- **Example**: https://github.com/org/repo/pull/123
+- **Example**: https://github.com/nova-corp/helix-api/pull/123
 
 📦 **Repository**
-- **Repository name**: org/repo
-- **Example**: org/project
+- **Repository name**: nova-corp/helix-api
+- **Example**: nova-corp/helix-api
 
 📄 **Product Requirements Document (PRD)**
 - **PRD URL (required)**: link to the PRD document
@@ -180,8 +180,8 @@ Great! A few more questions to help create the best test cases:
 ### For PR-based Test Jams:
 1. **Fetch PR Details** using MCP GitHub tools:
    - Get PR title, description, and labels
-   - **Extract repository name** (org/repo) from PR URL
-   - **Extract ticket ID** from PR title or description (e.g., TXPLAT-3858, MUL-4978)
+   - **Extract repository name** (nova-corp/helix-api) from PR URL
+   - **Extract ticket ID** from PR title or description (e.g., HELIX-2847, HELIX-4103)
    - Identify files changed and areas of code affected
    - Check for labels: `critical`, `high-priority`, `P0`, `P1`, `security`, `performance`
    - Analyze the PR comments for context and potential issues
@@ -252,7 +252,7 @@ Great! A few more questions to help create the best test cases:
 
 ### For Jira-based Test Jams:
 1. **Process Jira Ticket**:
-   - Extract the Jira ticket ID from the provided file or URL (e.g., PROJ-1234, TXPLAT-3858)
+   - Extract the Jira ticket ID from the provided file or URL (e.g., PROJ-1234, HELIX-2847)
    - Parse ticket content including:
      * Summary and description
      * Acceptance criteria
@@ -289,7 +289,7 @@ Great! A few more questions to help create the best test cases:
 5. **Jira Test Case Naming Format**:
    - **Format**: `[TICKET-ID] Test Case Description`
    - **Example**: `[PROJ-1234] Verify user can complete checkout flow`
-   - **Example**: `[TXPLAT-3858] Validate SMS webhook delivery`
+   - **Example**: `[HELIX-2847] Validate SMS webhook delivery`
    - If related PR is found, optionally add repo context: `[repo/name] [TICKET-ID] Test Case Description`
 
 6. **Jira Traceability**:
@@ -447,22 +447,22 @@ Formatting validation:
    - **Why**: Prevents formula injection + preserves natural multi-line formatting + consistent professional appearance
 
 ### Test Name Format with PR Context:
-**Format**: `[repo-org/repo-name] [TICKET-ID] Test Case Name`
+**Format**: `[nova-corp/helix-api] [TICKET-ID] Test Case Name`
 
 **Examples**:
-- `[mctx/messaging-app] [TXPLAT-3858] SMS Send Success Flow`
-- `[org/sms-service] [MUL-4978] SMS Dashboard Display - Chrome`
-- `[org/project] [TXPLAT-3511] SMS Click Event Webhook`
+- `[nova-corp/helix-api] [HELIX-2847] SMS Send Success Flow`
+- `[nova-corp/notify-service] [HELIX-4103] SMS Dashboard Display - Chrome`
+- `[nova-corp/helix-api] [HELIX-3192] SMS Click Event Webhook`
 
 **Extracting PR Context**:
 1. **Repository**: Extract from PR URL
-   - From: `https://github.com/org/messaging-app/pull/123`
-   - Extract: `[mctx/messaging-app]`
+   - From: `https://github.com/nova-corp/helix-api/pull/123`
+   - Extract: `[nova-corp/helix-api]`
 
 2. **Ticket ID**: Extract from PR title or description
-   - Look for patterns: TXPLAT-####, MUL-####, MCVULN-####, etc.
-   - From PR title: "TXPLAT-3858: Add SMS webhook support"
-   - Extract: `[TXPLAT-3858]`
+   - Look for patterns: HELIX-####, HELIX-####, SEC-####, etc.
+   - From PR title: "HELIX-2847: Add SMS webhook support"
+   - Extract: `[HELIX-2847]`
    - If no ticket found in title, check PR description
    - If multiple tickets, use the primary one (first mentioned)
    - If no ticket found, use: `[NO-TICKET]`
@@ -629,14 +629,14 @@ If user selects B or C, guide them through Jira configuration:
 🎯 Jira Project Configuration
 
 What Jira project should these test cases be created in?
-Example: EEE, TXPLAT, TESTING
+Example: HELIX, PROJ, TESTING
 
 👉 Project key:
 ```
 
 Verify project exists:
 ```python
-projects = user-DAST-Orch-jira_search_issues(projectKeys=[project_key], maxResults=1)
+projects = user-atlassian-mcp-jira_search_issues(projectKeys=[project_key], maxResults=1)
 ```
 
 #### Step 2: Epic Configuration
@@ -656,7 +656,7 @@ How would you like to organize these test case tickets?
 
 **Option A - Existing Epic:**
 ```
-👉 Enter the existing epic key (e.g., EEE-10332):
+👉 Enter the existing epic key (e.g., HELIX-10332):
 ```
 
 **Option B - New Epic:**
@@ -854,7 +854,7 @@ How should the participant tabs be named?
 If B:
 ```
 Please enter the {num_participants} participant names (comma-separated):
-Example: John Healy, Andre Pardue, Gregory Lehman
+Example: Jordan Blake, Casey Reed, Alex Morgan
 
 👉 Names:
 ```
@@ -1292,8 +1292,8 @@ Generate two files in the test jam session folder:
    - Traceability Matrix
 
 2. **`test_coverage_map.docx`** - Professional Word document with:
-   - company branding (Avenir Next For company font)
-   - Acme Platform colors (Peppercorn headers)
+   - brand styling (Helvetica Neue font)
+   - Helix Platform colors (brand theme headers)
    - Properly formatted tables
    - Ready for upload to Google Docs/Sheets
 

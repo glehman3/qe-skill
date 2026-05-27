@@ -19,7 +19,7 @@ For your first test, use a real PR from an company repository you have access to
 
 ```
 Example input:
-PR: https://github.com/org/[your-repo]/pull/[number]
+PR: https://github.com/nova-corp/helix-api/pull/[number]
 Focus: Core functionality and regression testing
 ```
 
@@ -76,7 +76,7 @@ After generation, check:
 
 ### Test Scenario 3: Repository-based
 **Input**:
-- Repository name (e.g., "org/project")
+- Repository name (e.g., "nova-corp/helix-api")
 - 7 participants
 - Last 4 weeks focus
 
@@ -197,7 +197,7 @@ AI: Let's create comprehensive test cases! 🎯
     - PR URL(s) or Repository name
     - Any specific areas of focus or concerns
 
-User: https://github.com/org/project/pull/12345
+User: https://github.com/nova-corp/helix-api/pull/12345
       Focus on SMS functionality, especially error handling and quota management
 
 AI: Thank you for submitting those! 

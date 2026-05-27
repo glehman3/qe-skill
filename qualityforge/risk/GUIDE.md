@@ -39,7 +39,7 @@ A mode in QualityForge that helps teams discover implementation risks **before w
 ```bash
 python3 qualityforge/risk/run.py \
   --feature-slug "<feature-slug>" \
-  --repo "<org/repo>" \
+  --repo "<nova-corp/helix-api>" \
   --prd-url "<prd-url>"
 ```
 
@@ -47,7 +47,7 @@ python3 qualityforge/risk/run.py \
 
 **Required:**
 - PRD Content (full text — not just a link)
-- Repository name (e.g., `org/project`)
+- Repository name (e.g., `nova-corp/helix-api`)
 
 **Optional but recommended:**
 - PRD URL, Jira ticket, Figma URL, additional context
@@ -73,7 +73,7 @@ The quality gate runs automatically. It checks:
 ```bash
 python3 qualityforge/risk/run.py \
   --feature-slug "<feature-slug>" \
-  --repo "<org/repo>" \
+  --repo "<nova-corp/helix-api>" \
   --prd-url "<prd-url>" \
   --export
 ```

@@ -64,7 +64,7 @@ Automated test jam creation that:
 ```
 /qforge
 
-→ PR: https://github.com/org/project/sms-service/pull/123
+→ PR: https://github.com/nova-corp/helix-api/pull/123
 → Participants: 5
 → Focus: SMS functionality and error handling
 → Timeline: Testing tomorrow
@@ -99,7 +99,7 @@ qe-suite/
 Found a bug or have an improvement? 
 - File an issue
 - Submit a PR
-- Contact @glehman
+- Contact @repo-maintainer
 
 ## License
 

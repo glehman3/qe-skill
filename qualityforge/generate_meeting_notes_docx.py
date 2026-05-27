@@ -4,8 +4,8 @@ Meeting Notes DOCX Generator
 
 Generates professionally formatted Word documents for meeting notes
 with company branding:
-- Font: Avenir Next For company (falls back to Avenir)
-- Colors: Peppercorn (#241C15) headers, Cavendish Yellow (#FFE01B) accents
+- Font: Helvetica Neue (falls back to Arial)
+- Colors: Header Dark (#241C15) headers, Accent Yellow (#FFE01B) accents
 
 Usage:
     python generate_meeting_notes_docx.py <output_path>
@@ -27,10 +27,10 @@ except ImportError:
     sys.exit(1)
 
 # Branding
-CAVENDISH_YELLOW = RGBColor(0xFF, 0xE0, 0x1B)
-PEPPERCORN = RGBColor(0x24, 0x1C, 0x15)
+ACCENT_YELLOW = RGBColor(0xFF, 0xE0, 0x1B)
+HEADER_DARK = RGBColor(0x24, 0x1C, 0x15)
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-BRAND_FONT = 'Avenir Next For company'
+BRAND_FONT = 'Helvetica Neue'
 
 
 def set_cell_shading(cell, color_hex):
@@ -50,7 +50,7 @@ def add_styled_heading(doc, text, level=1):
     """Add a heading with brand styling."""
     heading = doc.add_heading(text, level)
     for run in heading.runs:
-        run.font.color.rgb = PEPPERCORN
+        run.font.color.rgb = HEADER_DARK
         run.font.name = BRAND_FONT
     return heading
 
@@ -69,7 +69,7 @@ def generate_domain_auth_meeting_notes():
     title = doc.add_heading('Tx Domain Authentication – Entri Integration', 0)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     for run in title.runs:
-        run.font.color.rgb = PEPPERCORN
+        run.font.color.rgb = HEADER_DARK
         run.font.name = BRAND_FONT
     
     # Subtitle
@@ -97,7 +97,7 @@ def generate_domain_auth_meeting_notes():
     
     questions = [
         ("API Key Storage", "What table on the messaging side is used to store the API key created during the integration setup?"),
-        ("Unverified Root Domain", "If the root domain presented in the auth flow is not yet verified on the Acme Platform side, what happens? Is it possible for an unverified root domain to appear in this flow?"),
+        ("Unverified Root Domain", "If the root domain presented in the auth flow is not yet verified on the Helix Platform side, what happens? Is it possible for an unverified root domain to appear in this flow?"),
         ("Failed Auth Recovery", "After a failed Entri authentication, the only option shown is manual DNS record update. Is there an option to retry the Entri auth flow instead?"),
         ("Subdomain Flow – Missing Option", "When coming from the subdomain creation flow, there's no 'Use a different domain' option. Is this intentional, or should it be available?"),
         ("Status Flow Consistency", "Are the status states (failed auth, pending, verified, etc.) consistent across both the subdomain and root domain authentication flows?"),
@@ -148,9 +148,9 @@ def generate_domain_auth_meeting_notes():
     overview.add_run('Feature: ').bold = True
     overview.add_run('Tx Domain Authentication Using Entri (OBS Part 1)\n')
     overview.add_run('PM: ').bold = True
-    overview.add_run('Andre Pardue\n')
+    overview.add_run('Casey Reed\n')
     overview.add_run('Goal: ').bold = True
-    overview.add_run('Move domain authentication into Acme Platform and use Entri to expedite the DNS setup process.')
+    overview.add_run('Move domain authentication into Helix Platform and use Entri to expedite the DNS setup process.')
     apply_font(overview)
     
     doc.add_paragraph()
@@ -167,7 +167,7 @@ def generate_domain_auth_meeting_notes():
     api_points = [
         "API key and domain are stored on the messaging side (existing table, not new)",
         "Flow: Welcome page → Create API Key (with copy option) → Done → API call to messaging to save key",
-        "Integration call flows from Acme Platform to messaging for key persistence",
+        "Integration call flows from Helix Platform to messaging for key persistence",
         "API key created messaging confirms successful setup",
     ]
     for point in api_points:
@@ -178,7 +178,7 @@ def generate_domain_auth_meeting_notes():
     add_styled_heading(doc, 'Domain Authentication Flow', 2)
     
     domain_points = [
-        "Entire UI flow happens on Acme Platform side (not messaging)",
+        "Entire UI flow happens on Helix Platform side (not messaging)",
         "Option to use an entirely different domain from signup",
         "Option to use just the root domain",
         "Recommendation: Create subdomain for Tx sends (separate from marketing)",
@@ -228,13 +228,13 @@ def generate_domain_auth_meeting_notes():
     )
     context.add_run('Solution: ').bold = True
     context.add_run(
-        "Move domain authentication into Acme Platform and use Entri to streamline DNS setup, "
+        "Move domain authentication into Helix Platform and use Entri to streamline DNS setup, "
         "providing clearer onboarding checklist and reducing drop-off."
     )
     apply_font(context)
     
     # Save
-    output_path = Path('/Users/glehman/Downloads/Tx_Domain_Auth_Meeting_Notes.docx')
+    output_path = Path('/Users/repo-maintainer/Downloads/Tx_Domain_Auth_Meeting_Notes.docx')
     doc.save(str(output_path))
     print(f'✅ Created: {output_path}')
     return output_path

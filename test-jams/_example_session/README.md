@@ -120,7 +120,7 @@ When `/testjam` command generates test cases, it should follow the format demons
 
 1. **Test ID**: TC-001, TC-002, etc.
 2. **Category**: Functional Testing, Security Testing, Performance Testing, etc.
-3. **Test Name**: [org/repo] [TICKET-ID] Descriptive Name
+3. **Test Name**: [nova-corp/helix-api] [TICKET-ID] Descriptive Name
 4. **Priority**: P0 (Critical), P1 (High), P2 (Medium), P3 (Low)
 5. **Type**: Manual, Automated, Manual + Automated
 6. **Component**: The system component being tested

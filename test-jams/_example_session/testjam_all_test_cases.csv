@@ -1,5 +1,5 @@
 Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test Steps,Expected Results,Status,Tester,Date Tested,Actual Results,Notes,Bug ID
-TC-001,Functional Testing,[org/project] [TXPLAT-3858] SMS Send Success Flow,P0,Manual,SMS API,Verify successful SMS sending through API endpoint,"1. Valid API credentials
+TC-001,Functional Testing,[nova-corp/helix-api] [HELIX-2847] SMS Send Success Flow,P0,Manual,SMS API,Verify successful SMS sending through API endpoint,"1. Valid API credentials
 2. SMS plan with available credits
 3. Test phone number","1. Authenticate with valid API credentials
 2. Call /messages/send-sms endpoint with valid payload
@@ -9,7 +9,7 @@ TC-001,Functional Testing,[org/project] [TXPLAT-3858] SMS Send Success Flow,P0,M
 2. Response includes message_id
 3. SMS is queued for delivery
 4. Credits are deducted from account",,,,,,
-TC-002,Functional Testing,[org/project] [TXPLAT-3858] SMS Send - Missing Required Fields,P1,Manual,SMS API,Verify proper error handling when required fields are missing,"1. Valid API credentials
+TC-002,Functional Testing,[nova-corp/helix-api] [HELIX-2847] SMS Send - Missing Required Fields,P1,Manual,SMS API,Verify proper error handling when required fields are missing,"1. Valid API credentials
 2. SMS plan active","1. Authenticate with valid API credentials
 2. Call /messages/send-sms endpoint
 3. Omit 'to' field from payload
@@ -19,7 +19,7 @@ TC-002,Functional Testing,[org/project] [TXPLAT-3858] SMS Send - Missing Require
 2. Error message clearly indicates missing field
 3. No credits deducted
 4. No message sent",,,,,,
-TC-003,Security Testing,[org/project] [TXPLAT-3858] SMS API Authentication Validation,P0,Manual,Authentication,Verify API properly validates authentication credentials,"1. Valid and invalid API credentials available","1. Attempt API call without authentication header
+TC-003,Security Testing,[nova-corp/helix-api] [HELIX-2847] SMS API Authentication Validation,P0,Manual,Authentication,Verify API properly validates authentication credentials,"1. Valid and invalid API credentials available","1. Attempt API call without authentication header
 2. Verify 401 Unauthorized response
 3. Attempt API call with invalid API key
 4. Verify 401 Unauthorized response
@@ -28,7 +28,7 @@ TC-003,Security Testing,[org/project] [TXPLAT-3858] SMS API Authentication Valid
 2. Invalid credentials rejected with 401
 3. Error messages don't leak sensitive info
 4. Valid credentials allow access",,,,,,
-TC-004,Performance Testing,[org/project] [TXPLAT-3858] SMS API Response Time,P2,Manual + Automated,SMS API,Verify API response times meet SLA requirements,"1. SMS plan with credits
+TC-004,Performance Testing,[nova-corp/helix-api] [HELIX-2847] SMS API Response Time,P2,Manual + Automated,SMS API,Verify API response times meet SLA requirements,"1. SMS plan with credits
 2. Performance testing tools","1. Send 10 SMS API requests sequentially
 2. Measure response time for each
 3. Calculate average response time
@@ -37,7 +37,7 @@ TC-004,Performance Testing,[org/project] [TXPLAT-3858] SMS API Response Time,P2,
 2. 95th percentile < 1000ms
 3. Concurrent requests handled properly
 4. No timeouts or failures",,,,,,
-TC-005,Regression Testing,[org/project] [TXPLAT-3858] Email Sending Still Works,P1,Manual,Email API,Verify SMS changes didn't break existing email functionality,"1. Valid email API credentials
+TC-005,Regression Testing,[nova-corp/helix-api] [HELIX-2847] Email Sending Still Works,P1,Manual,Email API,Verify SMS changes didn't break existing email functionality,"1. Valid email API credentials
 2. Email plan active","1. Authenticate with valid credentials
 2. Send test email via /messages/send endpoint
 3. Verify email delivery
@@ -46,7 +46,7 @@ TC-005,Regression Testing,[org/project] [TXPLAT-3858] Email Sending Still Works,
 2. Email renders correctly
 3. Tracking pixels work
 4. No regression in email functionality",,,,,,
-TC-006,Cross-Browser Testing,[org/project] [TXPLAT-3858] SMS Dashboard Display - Chrome,P1,Manual,SMS Dashboard,Verify SMS dashboard displays correctly in Chrome browser,"1. Chrome browser (latest version)
+TC-006,Cross-Browser Testing,[nova-corp/helix-api] [HELIX-2847] SMS Dashboard Display - Chrome,P1,Manual,SMS Dashboard,Verify SMS dashboard displays correctly in Chrome browser,"1. Chrome browser (latest version)
 2. SMS plan active
 3. SMS usage data","1. Open Chrome browser
 2. Navigate to /sms/dashboard
@@ -58,7 +58,7 @@ TC-006,Cross-Browser Testing,[org/project] [TXPLAT-3858] SMS Dashboard Display -
 3. All UI elements properly positioned
 4. Responsive layout works correctly
 5. No console errors",,,,,,
-TC-007,UI/UX Testing,[org/project] [TXPLAT-3858] SMS Credit Warning Display,P2,Manual,SMS Dashboard,Verify warning appears when SMS credits run low,"1. SMS plan with less than 10% credits remaining","1. Navigate to SMS dashboard
+TC-007,UI/UX Testing,[nova-corp/helix-api] [HELIX-2847] SMS Credit Warning Display,P2,Manual,SMS Dashboard,Verify warning appears when SMS credits run low,"1. SMS plan with less than 10% credits remaining","1. Navigate to SMS dashboard
 2. Check for low credit warning banner
 3. Verify warning message is clear
 4. Click upgrade/add credits button
@@ -66,7 +66,7 @@ TC-007,UI/UX Testing,[org/project] [TXPLAT-3858] SMS Credit Warning Display,P2,M
 2. Message clearly indicates low credits
 3. Call-to-action button works
 4. User can easily add more credits",,,,,,
-TC-008,Functional Testing,[org/project] [TXPLAT-3858] SMS Scheduling Feature,P1,Manual,SMS Scheduling,Verify SMS can be scheduled for future delivery,"1. Valid API credentials
+TC-008,Functional Testing,[nova-corp/helix-api] [HELIX-2847] SMS Scheduling Feature,P1,Manual,SMS Scheduling,Verify SMS can be scheduled for future delivery,"1. Valid API credentials
 2. SMS plan with credits","1. Call SMS API with scheduled_time parameter
 2. Set time for 1 hour in future
 3. Submit request
@@ -75,7 +75,7 @@ TC-008,Functional Testing,[org/project] [TXPLAT-3858] SMS Scheduling Feature,P1,
 2. SMS queued with scheduled status
 3. SMS delivered at correct time
 4. Credits deducted at send time",,,,,,
-TC-009,Integration Testing,[org/project] [TXPLAT-3858] SMS + CRM Integration,P1,Manual,CRM Integration,Verify SMS sends properly integrate with CRM contact records,"1. CRM contacts available
+TC-009,Integration Testing,[nova-corp/helix-api] [HELIX-2847] SMS + CRM Integration,P1,Manual,CRM Integration,Verify SMS sends properly integrate with CRM contact records,"1. CRM contacts available
 2. SMS plan active
 3. Test contact with phone number","1. Select contact from CRM
 2. Initiate SMS send to contact
@@ -85,7 +85,7 @@ TC-009,Integration Testing,[org/project] [TXPLAT-3858] SMS + CRM Integration,P1,
 2. SMS activity logged in CRM
 3. Contact record updated with interaction
 4. Timeline shows SMS send event",,,,,,
-TC-010,Accessibility Testing,[org/project] [TXPLAT-3858] SMS Dashboard - Screen Reader,P2,Manual,Accessibility,Verify SMS dashboard is accessible via screen reader,"1. Screen reader software (NVDA/JAWS)
+TC-010,Accessibility Testing,[nova-corp/helix-api] [HELIX-2847] SMS Dashboard - Screen Reader,P2,Manual,Accessibility,Verify SMS dashboard is accessible via screen reader,"1. Screen reader software (NVDA/JAWS)
 2. SMS dashboard access","1. Enable screen reader
 2. Navigate to SMS dashboard
 3. Tab through all elements
@@ -96,7 +96,7 @@ TC-010,Accessibility Testing,[org/project] [TXPLAT-3858] SMS Dashboard - Screen 
 3. Meter values announced correctly
 4. Logical tab order maintained
 5. No accessibility errors",,,,,,
-TC-011,Functional Testing,[org/project] [TXPLAT-3858] SMS from_number Validation,P0,Manual,SMS API,Verify API validates from_number parameter correctly,"1. SMS plan with multiple from_numbers configured","1. Send SMS with valid from_number
+TC-011,Functional Testing,[nova-corp/helix-api] [HELIX-2847] SMS from_number Validation,P0,Manual,SMS API,Verify API validates from_number parameter correctly,"1. SMS plan with multiple from_numbers configured","1. Send SMS with valid from_number
 2. Verify successful send
 3. Send SMS with non-existent from_number
 4. Verify error response
@@ -105,7 +105,7 @@ TC-011,Functional Testing,[org/project] [TXPLAT-3858] SMS from_number Validation
 2. Invalid from_number returns 400 error
 3. Unauthorized from_number returns 403 error
 4. Error messages are clear and helpful",,,,,,
-TC-012,Error Handling,[org/project] [TXPLAT-3858] SMS Quota Exceeded,P0,Manual,Quota Management,Verify proper handling when SMS quota is exceeded,"1. SMS plan with 0 credits remaining or at limit","1. Attempt to send SMS with exhausted quota
+TC-012,Error Handling,[nova-corp/helix-api] [HELIX-2847] SMS Quota Exceeded,P0,Manual,Quota Management,Verify proper handling when SMS quota is exceeded,"1. SMS plan with 0 credits remaining or at limit","1. Attempt to send SMS with exhausted quota
 2. Verify API response
 3. Check error message content
 4. Verify no message sent
@@ -114,7 +114,7 @@ TC-012,Error Handling,[org/project] [TXPLAT-3858] SMS Quota Exceeded,P0,Manual,Q
 3. No message sent or queued
 4. Dashboard shows quota limit reached
 5. User prompted to upgrade or add credits",,,,,,
-TC-013,Performance Testing,[org/project] [TXPLAT-3858] Bulk SMS Send Performance,P2,Manual + Automated,Bulk Operations,Verify system handles bulk SMS sends efficiently,"1. SMS plan with sufficient credits
+TC-013,Performance Testing,[nova-corp/helix-api] [HELIX-2847] Bulk SMS Send Performance,P2,Manual + Automated,Bulk Operations,Verify system handles bulk SMS sends efficiently,"1. SMS plan with sufficient credits
 2. Bulk send capability","1. Prepare 100 SMS messages
 2. Submit bulk send request
 3. Monitor processing time
@@ -123,7 +123,7 @@ TC-013,Performance Testing,[org/project] [TXPLAT-3858] Bulk SMS Send Performance
 2. All 100 messages queued successfully
 3. No system performance degradation
 4. Proper queue management",,,,,,
-TC-014,Regression Testing,[org/project] [TXPLAT-3858] Webhook Notifications Still Works,P1,Manual,Webhooks,Verify webhook functionality not affected by SMS changes,"1. Webhook configured for message events
+TC-014,Regression Testing,[nova-corp/helix-api] [HELIX-2847] Webhook Notifications Still Works,P1,Manual,Webhooks,Verify webhook functionality not affected by SMS changes,"1. Webhook configured for message events
 2. Test endpoint available","1. Configure webhook for sent events
 2. Send test SMS
 3. Verify webhook triggered

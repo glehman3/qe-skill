@@ -160,7 +160,7 @@ All CSV files (master and individual participant files) use this structure with 
 
 ```csv
 Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test Steps,Expected Results,Status,Tester,Date Tested,Actual Results,Notes,Bug ID
-TC-001,Functional Testing,[org/project] [TXPLAT-3858] Login Flow Validation,P0,Manual,Authentication,Verify user login,...,...,...,,,,,,
+TC-001,Functional Testing,[nova-corp/helix-api] [HELIX-2847] Login Flow Validation,P0,Manual,Authentication,Verify user login,...,...,...,,,,,,
 ```
 
 **CSV Formatting Requirements:**
@@ -182,7 +182,7 @@ TC-001,Functional Testing,[org/project] [TXPLAT-3858] Login Flow Validation,P0,M
   - Combined with numbered lists (not bullet points) for complete protection
 - Ensures compatibility with Excel, Google Sheets, and other CSV tools
 
-**Test Name Format**: `[org/repo] [TICKET-ID] Test Case Name`
+**Test Name Format**: `[nova-corp/helix-api] [TICKET-ID] Test Case Name`
 
 **Execution Tracking Columns** (filled during test jam):
 - **Status**: `Not Started`, `Pass`, `Fail`, `Blocked`, `Skip` (initially blank)
@@ -199,8 +199,8 @@ After a test jam is completed, you can generate **Jira-ready ticket drafts** fro
 ```
 python3 qualityforge/test_jam_complete_jira.py \
   --csv /path/to/completed_test_jam.csv \
-  --project-key EEE \
-  --epic EEE-10332 \
+  --project-key HELIX \
+  --epic HELIX-10332 \
   --label tx_fy26_tx-template-management \
   --priority P3 \
   --issue-type Story \
@@ -215,7 +215,7 @@ Output:
 4. If artifact links are detected in Notes/Testing Evidence, the draft notes that attachments must be added manually
 
 Each test case name is prefixed with:
-- **Repository context**: `[org/repo]` extracted from PR URL
+- **Repository context**: `[nova-corp/helix-api]` extracted from PR URL
 - **Ticket ID**: `[TICKET-####]` extracted from PR title/description
 - **Test name**: Descriptive name of the test
 
@@ -263,7 +263,7 @@ This file contains:
 **Guides**:
 - [Test Account Setup Guide](./setup/TEST-ACCOUNT-SETUP.md) - Step-by-step instructions for creating test accounts
 - [Test Account Fields](./templates/test_account_fields.md) - Detailed field definitions
-- [admin-console Navigation Guide](./setup/Admin Console-NAVIGATION.md) - Post-creation account modifications (MRR, plan changes, etc.)
+- [admin-console Navigation Guide](./setup/MCADMIN-NAVIGATION.md) - Post-creation account modifications (MRR, plan changes, etc.)
 
 See the **Test Account Format** section in [templates/csv-formats.md](./templates/csv-formats.md) for full CSV structure details.
 
@@ -347,7 +347,7 @@ AI: Let's create comprehensive test cases! 🎯
     
     Provide PR URL(s), Repository, PRD, or Jira ticket...
 
-User: https://github.com/org/project/pull/12345
+User: https://github.com/nova-corp/helix-api/pull/12345
       Focus on SMS functionality and billing integration
 
 AI: How many participants?
@@ -390,7 +390,7 @@ AI: Let's create comprehensive test cases! 🎯
     1. PRD URL
     2. PRD Contents (paste full text)
 
-User: PRD URL: https://confluence.example.com/display/MAIL/SMS-Scheduling-Feature
+User: PRD URL: https://confluence.example.com/display/HELIX/SMS-Scheduling-Feature
       
       PRD Contents:
       ===
@@ -436,7 +436,7 @@ User: 1
 
 AI: Let's create comprehensive test cases! 🎯
 
-User: Repository: org/project
+User: Repository: nova-corp/helix-api
       Focus on all changes from the last 4 weeks
 
 AI: How many participants will be part of this Test Jam?
@@ -545,7 +545,7 @@ For issues or questions:
 
 ```bash
 # Clone the repository
-git clone https://github.com/glehman/qe-suite ~/cursor-rules
+git clone https://github.com/glehman3/qe-suite ~/cursor-rules
 
 # Pull updates anytime
 cd ~/cursor-rules && git pull
@@ -590,7 +590,7 @@ After setup, recipients should verify:
 | [setup/FIRST-TIME-SETUP.md](./setup/FIRST-TIME-SETUP.md) | Complete first-time setup |
 | [setup/MCP-SETUP.md](./setup/MCP-SETUP.md) | MCP configuration guide |
 | [setup/TEST-ACCOUNT-SETUP.md](./setup/TEST-ACCOUNT-SETUP.md) | Test account creation |
-| [setup/Admin Console-NAVIGATION.md](./setup/Admin Console-NAVIGATION.md) | admin-console navigation guide |
+| [setup/MCADMIN-NAVIGATION.md](./setup/MCADMIN-NAVIGATION.md) | admin-console navigation guide |
 | [guides/TESTING-GUIDE.md](./guides/TESTING-GUIDE.md) | Testing and troubleshooting |
 | [reference/FORMAT-REFERENCE.md](./reference/FORMAT-REFERENCE.md) | CSV format specification |
 | [risk/GUIDE.md](./risk/GUIDE.md) | Risk analysis guide |

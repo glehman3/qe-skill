@@ -1,7 +1,7 @@
 # Test Jam Example Session - Validation Report
 
 **Date**: February 5, 2026  
-**Location**: `/Users/glehman3/qe-suite/test-jams/_example_session/`  
+**Location**: `~/qe-suite/test-jams/_example_session/`  
 **Validator**: Automated CSV and Markdown Validation
 
 ---

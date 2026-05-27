@@ -2,13 +2,13 @@
 
 ---
 
-## ☁️ Already Have Cloud Workspace?
+## ☁️ Already Have Cursor Cloud?
 
-**If you already have Cloud Workspace set up, you do NOT need to follow this guide!**
+**If you already have Cursor Cloud set up, you do NOT need to follow this guide!**
 
 Simply:
 1. Open Cursor **Settings → Tools & MCP's**
-2. Enable **DAST-Orch** (includes GitHub MCP)
+2. Enable **Atlassian MCP bundle** (includes GitHub MCP)
 3. Start using `/qforge` immediately!
 
 **Time Required**: ~1 minute
@@ -17,7 +17,7 @@ Simply:
 
 ## 📋 Quick Overview
 
-**What you'll install (if not using Cloud Workspace):**
+**What you'll install (if not using Cursor Cloud):**
 1. ✅ Cursor IDE
 2. ✅ GitHub MCP (Required for QualityForge)
 3. ⭐ Mabl MCP (Optional - enhances test generation)
@@ -25,7 +25,7 @@ Simply:
 
 **Time Required**: ~15-20 minutes
 
-**Who this is for**: First-time users who have never set up Cursor or MCPs before and do NOT have Cloud Workspace
+**Who this is for**: First-time users who have never set up Cursor or MCPs before and do NOT have Cursor Cloud
 
 ---
 
@@ -40,7 +40,7 @@ Simply:
 
 ### Official Installation Guide
 
-For detailed Cursor setup, see: https://docs.example.com/app/dp/capability/CAP-2127/capabilityDocs/main/docs/reference/cursor/onboarding_guide.md
+For detailed Cursor setup, see: https://docs.cursor.com/get-started/mcp
 
 ---
 
@@ -237,7 +237,7 @@ Contact your Mabl administrator for:
 
 Google Drive MCP enables creating formatted Google Sheets directly from test jam generation. This allows you to create professional, ready-to-use spreadsheets for test jams.
 
-**Setup**: Enable via Cursor Settings → Tools & MCP's → DAST-Orch (includes Google Drive MCP)
+**Setup**: Enable via Cursor Settings → Tools & MCP's → Atlassian MCP bundle (includes Google Drive MCP)
 
 ### Bugsnag MCP
 
@@ -267,7 +267,7 @@ Provide a PR URL or repository name to get started!
 /qforge
 
 I need test cases for:
-https://github.com/org/messaging-app/pull/12345
+https://github.com/nova-corp/helix-api/pull/12345
 
 Focus on email campaign functionality and billing integration.
 ```
@@ -363,10 +363,10 @@ For better performance and context:
 
 ```bash
 # Clone the repo you're testing
-git clone https://github.com/mctx/messaging-app
+git clone https://github.com/nova-corp/helix-api
 
 # Open in Cursor
-cursor /path/to/messaging-app
+cursor /path/to/helix-api
 ```
 
 **Benefits**:
@@ -397,7 +397,7 @@ cursor /path/to/messaging-app
 - **Quick Start**: [QUICK-START.md](../QUICK-START.md)
 
 ### Support Channels
-- **Slack**: #mcqa channel
+- **Slack**: #qa-engineering channel
 - **General Cursor**: Cursor documentation or community forums
 
 ### Related Tools
@@ -448,7 +448,7 @@ Now that setup is complete:
 If you encounter errors not covered here:
 1. Document the error and solution
 2. Update this guide (PR welcome!)
-3. Reach out to Gregory Lehman (@greg) in Slack
+3. Reach out to Alex Morgan (@alex.morgan) in Slack
 
 **Your contributions help everyone!** 🙌
 

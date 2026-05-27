@@ -29,7 +29,7 @@ References:
 
 Author: QualityForge AI Assistant
 Date: January 12, 2026
-Phase: 2 - Core Generation (Acme Platform-enhanced)
+Phase: 2 - Core Generation (Helix Platform-enhanced)
 """
 
 import os
@@ -55,7 +55,7 @@ TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
 # Locator Priority (from PLAYWRIGHT-PATTERNS.md - Section 2)
 # Based on real patterns from app-monolith/playwright repository
 LOCATOR_PRIORITY = {
-    1: "getByRole",     # HIGHEST PRIORITY - Acme Platform uses this most (buttons, links, headings)
+    1: "getByRole",     # HIGHEST PRIORITY - Helix Platform uses this most (buttons, links, headings)
     2: "getByLabel",    # Form inputs (labels, checkboxes)
     3: "getByText",     # Visible text with exact matching
     4: "getByTestId",   # Data attributes (when explicitly mentioned)
@@ -523,14 +523,14 @@ class ActionDetector:
     
     Uses application-specific patterns extracted from app-monolith/playwright.
     
-    Examples (based on real Acme Platform code):
+    Examples (based on real Helix Platform code):
         "Navigate to /templates"     → await page.goto('/templates?tab=saved');
         "Click Manage Audience"      → await page.getByRole('button', { name: 'Manage Audience' }).click();
         "Type DELETE to confirm"     → await page.getByLabel('Type DELETE to confirm').fill('DELETE');
         "Verify import was completed"→ await expect(page.getByRole('heading', { name: 'Your import was completed' })).toBeVisible();
     
     Locator Priority (from PLAYWRIGHT-PATTERNS.md):
-        1. getByRole()   - MOST COMMON in Acme Platform (buttons, links, headings)
+        1. getByRole()   - MOST COMMON in Helix Platform (buttons, links, headings)
         2. getByLabel()  - Form inputs, checkboxes
         3. getByText()   - Exact text matching (with { exact: true })
         4. getByTestId() - Data attributes
@@ -553,7 +553,7 @@ class ActionDetector:
             lambda m: f"await page.goto('{m.group(1).strip()}');"
         ),
         
-        # ===== acme-platform-SPECIFIC: MODAL INTERACTIONS =====
+        # ===== helix-platform-SPECIFIC: MODAL INTERACTIONS =====
         # Pattern: "Close Modal", "Dismiss modal" → Close button
         (
             r'(?:close|dismiss)\s+(?:the\s+)?modal',
@@ -576,7 +576,7 @@ class ActionDetector:
             lambda m: f"await page.getByLabel('Type DELETE to confirm').fill('DELETE');"
         ),
         
-        # ===== acme-platform-SPECIFIC: MANAGEMENT ACTIONS =====
+        # ===== helix-platform-SPECIFIC: MANAGEMENT ACTIONS =====
         # Pattern: "Click Manage Audience", "Manage your audience"
         (
             r'(?:click|open)\s+(?:the\s+)?manage\s+(?:your\s+)?audience',
@@ -592,7 +592,7 @@ class ActionDetector:
             lambda m: f"await page.getByRole('button', {{ name: 'Manage App' }}).click();"
         ),
         
-        # ===== acme-platform-SPECIFIC: IMPORT/EXPORT WORKFLOWS =====
+        # ===== helix-platform-SPECIFIC: IMPORT/EXPORT WORKFLOWS =====
         # Pattern: "Import contacts", "Click Import"
         (
             r'(?:click|select|choose)\s+(?:the\s+)?import\s+contacts?',
@@ -615,7 +615,7 @@ class ActionDetector:
             lambda m: f"await page.getByRole('button', {{ name: 'Complete Import' }}).click();"
         ),
         
-        # ===== acme-platform-SPECIFIC: STATUS & VERIFICATION (with headings) =====
+        # ===== helix-platform-SPECIFIC: STATUS & VERIFICATION (with headings) =====
         # Pattern: "Verify import was completed" → heading verification
         (
             r'(?:verify|check|confirm)\s+(?:that\s+)?(?:the\s+)?import\s+(?:was\s+)?completed',
@@ -685,7 +685,7 @@ class ActionDetector:
             lambda m: f"await page.getByRole('option', {{ name: '{m.group(1).strip()}' }}).click();"
         ),
         
-        # ===== CLICKS (specific to general, Acme Platform style) =====
+        # ===== CLICKS (specific to general, Helix Platform style) =====
         # Specific button names (don't title-case these common ones)
         (
             r'click\s+(?:on\s+)?(?:the\s+)?edit\s+(?:button)?',
@@ -781,7 +781,7 @@ class ActionDetector:
             lambda m: f"await expect(page.getByRole('columnheader')).toHaveCount(5); // TODO: Verify count and identity"
         ),
         
-        # ===== ASSERTIONS (Acme Platform style with exact matching) =====
+        # ===== ASSERTIONS (Helix Platform style with exact matching) =====
         # Button/element visibility with specific role
         (
             r'(?:verify|check|confirm|assert)\s+(?:that\s+)?(?:the\s+)?(.+?)\s+button\s+(?:is|are)\s+(?:visible|displayed|shown)',
@@ -3685,7 +3685,7 @@ class PlaywrightGenerator:
         Write/update playwright-tests/.env with provided overrides.
 
         This is intended to support runtime validation where the end user has a local
-        Acme Platform (or relevant slice) running and wants tests to execute immediately.
+        Helix Platform (or relevant slice) running and wants tests to execute immediately.
 
         Notes:
           - We never print secret values.

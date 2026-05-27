@@ -8,9 +8,9 @@ Rubric: qualityforge/risk/CONTENT-ACCURACY-RUBRIC.md
 ## Quality Risk Analysis: SMS Scheduling Feature (Example)
 
 **Generated:** 2026-01-08  
-**Repository:** `org/project`  
-**PRD:** [SMS Scheduling Feature PRD](https://confluence.example.com/display/MAIL/SMS-Scheduling-PRD)  
-**Jira:** TXPLAT-5432 *(optional)*
+**Repository:** `nova-corp/helix-api`  
+**PRD:** [SMS Scheduling Feature PRD](https://confluence.example.com/display/HELIX/SMS-Scheduling-PRD)  
+**Jira:** HELIX-5432 *(optional)*
 
 ---
 
@@ -119,5 +119,5 @@ Reliable delivery (REQ-003) implies monitoring and alerting, but existing loggin
 
 ## Sources
 
-- PRD: https://confluence.example.com/display/MAIL/SMS-Scheduling-PRD
-- Jira: TXPLAT-5432
+- PRD: https://confluence.example.com/display/HELIX/SMS-Scheduling-PRD
+- Jira: HELIX-5432

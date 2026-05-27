@@ -24,7 +24,7 @@ Read the version from `qualityforge/VERSION` file:
 
 Use GitHub MCP to check for the latest release:
 ```
-get_latest_release(owner: "glehman", repo: "qe-suite")
+get_latest_release(owner: "glehman3", repo: "qe-suite")
 ```
 - Extract `tag_name` (e.g., `v1.2.0`)
 - Strip the `v` prefix for comparison
@@ -68,7 +68,7 @@ Append to `qualityforge/metrics.log` (JSONL format):
 
 **Metrics Spreadsheet ID**: `15Px9z6MBG8b5o6dZcRaLO-cnaG61LNcdbbxiAaDu_-o` · Sheet: `Invocations`
 
-**Important**: Do **not** call **`user-DAST-Orch`** `sheets_append` during `/qforge`. That MCP tool can **hang indefinitely** (no reliable client timeout while the server waits on Google APIs/auth). See `qualityforge/guides/METRICS-SYNC.md`.
+**Important**: Do **not** call **`user-atlassian-mcp`** `sheets_append` during `/qforge`. That MCP tool can **hang indefinitely** (no reliable client timeout while the server waits on Google APIs/auth). See `qualityforge/guides/METRICS-SYNC.md`.
 
 After local logging:
 
@@ -84,7 +84,7 @@ After local logging:
 
 **Key behaviors**:
 - Local logging ALWAYS happens first (guarantees no data loss)
-- Sheets sync is best-effort; never block the menu on DAST-Orch Sheets MCP
+- Sheets sync is best-effort; never block the menu on Atlassian MCP bundle Sheets MCP
 - Pending entries accumulate until synced
 - Use `qualityforge/metrics.py` (`log_invocation`, `get_pending_entries`, `format_for_sheets`, `mark_entries_synced`) and the CLI flags documented in `METRICS-SYNC.md`
 
