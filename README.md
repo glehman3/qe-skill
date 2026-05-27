@@ -1,6 +1,18 @@
 # Quality Engineering Suite by QE Suite
 
-This repository contains the **Quality Engineering Suite by QE Suite** (powered by **QualityForge**) — a comprehensive Quality Engineering Suite for test case generation, risk analysis, and automation for nova-corp/helix-api workflows.
+[![Portfolio](https://img.shields.io/badge/profile-glehman3-blue)](https://github.com/glehman3)
+
+**Cursor `/qforge` workflows** for test jam generation, risk analysis, Jira ticket creation, and GitHub MCP PR analysis—packaged as Agent Skills for repeatable QE delivery.
+
+| Quick start | Learn more |
+|-------------|------------|
+| Clone → restart Cursor → open this folder → type `/qforge` | [QualityForge docs](./qualityforge/README.md) · [Quick start](./qualityforge/QUICK-START.md) · [Example output](./test-jams/_example_session/) |
+
+**Live today:** test case/jam generation (PRs, repos, PRDs, Jira), CSV + Google Sheets export, GitHub MCP integration, version checks. **Beta:** risk analysis.
+
+---
+
+This repository contains the **Quality Engineering Suite by QE Suite** (powered by **QualityForge**) — test case generation, risk analysis, and automation workflows for engineering teams.
 
 ## 🚀 New to Cursor?
 
