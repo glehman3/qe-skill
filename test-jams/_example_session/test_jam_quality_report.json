@@ -1,0 +1,187 @@
+{
+  "ac_coverage": {
+    "AC1": [
+      "TC-001",
+      "TC-008",
+      "TC-002",
+      "TC-003",
+      "TC-004",
+      "TC-005",
+      "TC-007",
+      "TC-009",
+      "TC-011",
+      "TC-012"
+    ],
+    "AC2": [
+      "TC-007",
+      "TC-008",
+      "TC-001",
+      "TC-002",
+      "TC-004",
+      "TC-012",
+      "TC-013",
+      "TC-003",
+      "TC-005",
+      "TC-006"
+    ],
+    "AC3": [
+      "TC-007",
+      "TC-006",
+      "TC-010",
+      "TC-008",
+      "TC-012",
+      "TC-001",
+      "TC-002",
+      "TC-003",
+      "TC-004",
+      "TC-005"
+    ]
+  },
+  "acs": [
+    {
+      "ac_id": "AC1",
+      "text": "User can view SMS send success flow"
+    },
+    {
+      "ac_id": "AC2",
+      "text": "User can see SMS credits"
+    },
+    {
+      "ac_id": "AC3",
+      "text": "User can navigate SMS dashboard"
+    }
+  ],
+  "counts": {
+    "ac_coverage_gaps": 0,
+    "findings_total": 17,
+    "high": 0,
+    "low": 11,
+    "medium": 6,
+    "test_cases_reviewed": 14
+  },
+  "findings": [
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify response status'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-001"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify 401 Unauthorized response'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-003"
+    },
+    {
+      "field": "expected_results",
+      "issue": "Vague expected results (e.g., 'works as expected')",
+      "severity": "medium",
+      "suggestion": "Rewrite as verifiable outcomes (what appears/changes, what text, what state).",
+      "test_id": "TC-004"
+    },
+    {
+      "field": "expected_results",
+      "issue": "Vague expected results (e.g., 'works as expected')",
+      "severity": "medium",
+      "suggestion": "Rewrite as verifiable outcomes (what appears/changes, what text, what state).",
+      "test_id": "TC-005"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify email delivery'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-005"
+    },
+    {
+      "field": "expected_results",
+      "issue": "Vague expected results (e.g., 'works as expected')",
+      "severity": "medium",
+      "suggestion": "Rewrite as verifiable outcomes (what appears/changes, what text, what state).",
+      "test_id": "TC-006"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Check SMS usage meter displays'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-006"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify scheduling confirmation'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-008"
+    },
+    {
+      "field": "expected_results",
+      "issue": "Vague expected results (e.g., 'works as expected')",
+      "severity": "medium",
+      "suggestion": "Rewrite as verifiable outcomes (what appears/changes, what text, what state).",
+      "test_id": "TC-009"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify phone number auto-populated'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-009"
+    },
+    {
+      "field": "expected_results",
+      "issue": "Vague expected results (e.g., 'works as expected')",
+      "severity": "medium",
+      "suggestion": "Rewrite as verifiable outcomes (what appears/changes, what text, what state).",
+      "test_id": "TC-010"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify announcements for each section'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-010"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify successful send'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-011"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify API response'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-012"
+    },
+    {
+      "field": "expected_results",
+      "issue": "Vague expected results (e.g., 'works as expected')",
+      "severity": "medium",
+      "suggestion": "Rewrite as verifiable outcomes (what appears/changes, what text, what state).",
+      "test_id": "TC-013"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Check system resource usage'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-013"
+    },
+    {
+      "field": "test_steps",
+      "issue": "Vague step 'Verify webhook triggered'",
+      "severity": "low",
+      "suggestion": "Reference a concrete UI element and the action (click/fill/navigate) explicitly.",
+      "test_id": "TC-014"
+    }
+  ],
+  "generated_at_utc": "2026-02-12T20:49:59.801293+00:00",
+  "mode": "quick",
+  "read_warnings": [],
+  "test_jam_dir": "/Users/glehman3/qe-suite/test-jams/_example_session"
+}

@@ -1,0 +1,67 @@
+Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test Steps,Expected Results,Status,Tester,Date Tested,Actual Results,Notes,Bug ID
+TC-008,Functional Testing,[org/project] [TXPLAT-3858] SMS Scheduling Feature,P1,Manual,SMS Scheduling,Verify SMS can be scheduled for future delivery,"1. Valid API credentials
+2. SMS plan with credits","1. Call SMS API with scheduled_time parameter
+2. Set time for 1 hour in future
+3. Submit request
+4. Verify scheduling confirmation
+5. Wait and verify delivery at scheduled time","1. API accepts scheduled_time parameter
+2. SMS queued with scheduled status
+3. SMS delivered at correct time
+4. Credits deducted at send time",,,,,,
+TC-009,Integration Testing,[org/project] [TXPLAT-3858] SMS + CRM Integration,P1,Manual,CRM Integration,Verify SMS sends properly integrate with CRM contact records,"1. CRM contacts available
+2. SMS plan active
+3. Test contact with phone number","1. Select contact from CRM
+2. Initiate SMS send to contact
+3. Verify phone number auto-populated
+4. Send SMS
+5. Check CRM for activity record","1. Contact phone number used correctly
+2. SMS activity logged in CRM
+3. Contact record updated with interaction
+4. Timeline shows SMS send event",,,,,,
+TC-010,Accessibility Testing,[org/project] [TXPLAT-3858] SMS Dashboard - Screen Reader,P2,Manual,Accessibility,Verify SMS dashboard is accessible via screen reader,"1. Screen reader software (NVDA/JAWS)
+2. SMS dashboard access","1. Enable screen reader
+2. Navigate to SMS dashboard
+3. Tab through all elements
+4. Verify announcements for each section
+5. Test form inputs for labels
+6. Verify meter values announced","1. All elements have accessible names
+2. Form fields properly labeled
+3. Meter values announced correctly
+4. Logical tab order maintained
+5. No accessibility errors",,,,,,
+TC-011,Functional Testing,[org/project] [TXPLAT-3858] SMS from_number Validation,P0,Manual,SMS API,Verify API validates from_number parameter correctly,"1. SMS plan with multiple from_numbers configured","1. Send SMS with valid from_number
+2. Verify successful send
+3. Send SMS with non-existent from_number
+4. Verify error response
+5. Send SMS with unauthorized from_number
+6. Verify rejection","1. Valid from_number accepted
+2. Invalid from_number returns 400 error
+3. Unauthorized from_number returns 403 error
+4. Error messages are clear and helpful",,,,,,
+TC-012,Error Handling,[org/project] [TXPLAT-3858] SMS Quota Exceeded,P0,Manual,Quota Management,Verify proper handling when SMS quota is exceeded,"1. SMS plan with 0 credits remaining or at limit","1. Attempt to send SMS with exhausted quota
+2. Verify API response
+3. Check error message content
+4. Verify no message sent
+5. Check dashboard shows quota status","1. API returns 429 or appropriate error
+2. Error message explains quota exceeded
+3. No message sent or queued
+4. Dashboard shows quota limit reached
+5. User prompted to upgrade or add credits",,,,,,
+TC-013,Performance Testing,[org/project] [TXPLAT-3858] Bulk SMS Send Performance,P2,Manual + Automated,Bulk Operations,Verify system handles bulk SMS sends efficiently,"1. SMS plan with sufficient credits
+2. Bulk send capability","1. Prepare 100 SMS messages
+2. Submit bulk send request
+3. Monitor processing time
+4. Verify all messages queued
+5. Check system resource usage","1. Bulk request processes within 5 seconds
+2. All 100 messages queued successfully
+3. No system performance degradation
+4. Proper queue management",,,,,,
+TC-014,Regression Testing,[org/project] [TXPLAT-3858] Webhook Notifications Still Works,P1,Manual,Webhooks,Verify webhook functionality not affected by SMS changes,"1. Webhook configured for message events
+2. Test endpoint available","1. Configure webhook for sent events
+2. Send test SMS
+3. Verify webhook triggered
+4. Check webhook payload
+5. Verify all expected data present","1. Webhook fires for SMS events
+2. Payload includes all required data
+3. Webhook timing is appropriate
+4. No regression in webhook functionality",,,,,,

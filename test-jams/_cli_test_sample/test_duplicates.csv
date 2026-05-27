@@ -1,0 +1,5 @@
+ID,Component,Objective,Steps to Test,Expected Results,Testing Evidence,Results,Notes,Bug ID
+TC-001,Page A,Test login flow,1. Go to login,1. Login works,https://screenshot.com/a.png,FAIL,First failure,
+TC-001,Page A,Test login flow - duplicate,1. Go to login,1. Login works,,FAIL,Duplicate ID - should be skipped,
+TC-002,Page B,Test checkout,1. Go to checkout,1. Checkout works,https://drive.google.com/file/video.mp4,FAIL,Has video artifact,
+TC-003,Page C,Test dashboard,1. Go to dashboard,1. Dashboard loads,See attached screenshot.png in notes,FAIL,Artifact hint in notes,

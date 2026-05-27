@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qualityforge.local/schemas/validation-report.schema.json",
+  "title": "QualityForge Playwright validation-report.json",
+  "description": "Schema for Phase 7 validation reports. Enum values (kind, skip_reason) are considered stable; new values may be added but existing values will not be removed or renamed.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "phase",
+    "mode",
+    "fix_level",
+    "test_dir",
+    "timestamp_utc",
+    "attempts",
+    "result",
+    "skip_reason",
+    "base_url",
+    "missing_keys",
+    "applied_fixes",
+    "suggestions",
+    "suite_metrics",
+    "quality",
+    "todo_policy"
+  ],
+  "properties": {
+    "phase": {
+      "type": "integer",
+      "description": "Phase marker for the Playwright generator/validator feature."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["static", "runtime"],
+      "description": "Validation mode. static validates discovery/config; runtime executes tests."
+    },
+    "fix_level": {
+      "type": "string",
+      "enum": ["conservative", "aggressive"],
+      "description": "Suggestion/fix intensity level. Safe-by-default; no selector guessing."
+    },
+    "todo_policy": {
+      "type": "string",
+      "enum": ["allow", "warn", "error"],
+      "description": "TODO policy for quality gating. allow permits TODOs; warn flags TODOs as high severity; error expects zero TODOs."
+    },
+    "test_dir": {
+      "type": "string",
+      "description": "Absolute path to the suite directory that was validated."
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "description": "UTC timestamp for report creation (ISO-8601 when available)."
+    },
+    "attempts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/attempt" },
+      "description": "Attempt summaries (static: 1 attempt; runtime: up to MAX_ATTEMPTS)."
+    },
+    "result": {
+      "type": ["string", "null"],
+      "enum": ["passed", "failed", "skipped", null],
+      "description": "Overall validation result."
+    },
+    "skip_reason": {
+      "type": ["string", "null"],
+      "enum": [
+        "test_dir_missing",
+        "invalid_mode",
+        "deps_not_installed",
+        "base_url_missing",
+        "baseurl_invalid",
+        "auth_missing",
+        null
+      ],
+      "description": "Reason for result=skipped (null otherwise)."
+    },
+    "base_url": {
+      "type": ["string", "null"],
+      "description": "Base URL used for runtime validation (safe to include; no secrets)."
+    },
+    "missing_keys": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Missing environment keys (names only; no values)."
+    },
+    "applied_fixes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Safe auto-fixes applied (no secrets)."
+    },
+    "suggestions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/suggestion" },
+      "description": "Actionable next steps (safe to share; no secrets)."
+    },
+    "suite_metrics": {
+      "$ref": "#/$defs/suiteMetrics",
+      "description": "Static suite quality metrics (no Playwright deps required)."
+    },
+    "quality": {
+      "$ref": "#/$defs/quality",
+      "description": "Derived quality signals (warnings + simple gates) to prevent low-value suites."
+    }
+  },
+  "$defs": {
+    "attempt": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["attempt", "kind", "headline"],
+      "properties": {
+        "attempt": { "type": "integer", "minimum": 1 },
+        "exit_code": { "type": "integer" },
+        "kind": {
+          "type": ["string", "null"],
+          "enum": [
+            "deps_missing",
+            "playwright_browsers_missing",
+            "env_missing",
+            "baseurl_invalid",
+            "test_failures",
+            "config_missing",
+            "exception",
+            "timeout",
+            "network_error",
+            "auth_failure",
+            "element_not_found",
+            null
+          ],
+          "description": "Failure classification for this attempt (null for pass). Phase 7 v2 added: timeout, network_error, auth_failure, element_not_found."
+        },
+        "headline": {
+          "type": ["string", "null"],
+          "description": "Short summary for this attempt (e.g., error headline or 'passed')."
+        }
+      }
+    },
+    "suggestion": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string" },
+        "command": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "suiteMetrics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "spec_files",
+        "tests",
+        "todos",
+        "assertions",
+        "page_actions",
+        "auth_hooks",
+        "has_env_example",
+        "has_env"
+      ],
+      "properties": {
+        "spec_files": { "type": "integer", "minimum": 0 },
+        "tests": { "type": "integer", "minimum": 0 },
+        "todos": { "type": "integer", "minimum": 0 },
+        "assertions": { "type": "integer", "minimum": 0 },
+        "page_actions": { "type": "integer", "minimum": 0 },
+        "auth_hooks": { "type": "integer", "minimum": 0 },
+        "has_env_example": { "type": "boolean" },
+        "has_env": { "type": "boolean" },
+        "avg_todos_per_test": { "type": ["number", "null"] },
+        "tests_with_zero_assertions": { "type": "integer", "minimum": 0 },
+        "tests_with_todos": { "type": "integer", "minimum": 0 },
+        "waitForTimeout_calls": { "type": "integer", "minimum": 0 },
+        "css_locator_calls": { "type": "integer", "minimum": 0 },
+        "accessible_locator_calls": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["warnings", "gates"],
+      "properties": {
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/qualityWarning" }
+        },
+        "gates": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "has_tests": { "type": "boolean" },
+            "no_zero_assertion_tests": { "type": "boolean" },
+            "no_waitForTimeout": { "type": "boolean" },
+            "no_todos": { "type": "boolean" },
+            "todo_policy": { "type": "string" },
+            "todo_policy_pass": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "qualityWarning": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["severity", "rule", "message"],
+      "properties": {
+        "severity": { "type": "string", "enum": ["low", "medium", "high"] },
+        "rule": { "type": "string" },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}
+

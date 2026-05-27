@@ -1,0 +1,84 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Python
+__pycache__/
+*.pyc
+qualityforge/_generated/
+
+# Zip files (for sharing)
+*.zip
+
+# QualityForge duplicates
+qualityforge-complete*/
+testjam-complete*/
+
+# Completed test jam sessions (keep only _example_session)
+test-jams/20*/
+test-jams/19*/
+TestJam_*/
+
+# Test account CSVs (contain sensitive data)
+testjam_test_accounts.csv
+**/testjam_test_accounts.csv
+qualityforge_test_accounts.csv
+**/qualityforge_test_accounts.csv
+
+# Internal planning documents (not for public repo)
+**/JIRA-TICKETS.md
+
+# Node modules
+node_modules/
+npm-debug.log*
+
+# Playwright
+playwright-report/
+test-results/
+playwright/.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+
+# Local-only documentation (never commit)
+*-LOCAL-ONLY.md
+*-NOTES.md
+*-COMPLETE.md
+*-PREVIEW.md
+*-SUMMARY.md
+*-ANALYSIS.md
+*-PLAN.md
+*-CHECKLIST.md
+.local-notes/
+
+# Archive folders (historical docs, not needed in repo)
+qualityforge/archive/
+qualityforge/playwright/_archive/
+
+# Project development files (planning, progress, internal docs)
+_project-dev/
+
+# Artifacts (demo screenshots, innovation-day images, etc.)
+_artifacts/
+
+# Generated Jira draft output (from test_jam_complete_jira.py)
+jira_ticket_drafts.*
+**/jira_ticket_drafts.*
+
+# Generated quality gate / CSV validation reports (from test_jam_quality_gate.py / test_jam_csv_validate.py)
+**/test_jam_quality_gate_report.json
+**/test_jam_csv_validation_report.json

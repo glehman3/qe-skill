@@ -1,0 +1,14 @@
+{
+  "findings": [],
+  "input_path": "qualityforge/templates/EXAMPLE-RISK-REPORT.md",
+  "passed": true,
+  "summary": {
+    "findings_total": 0,
+    "high": 0,
+    "low": 0,
+    "medium": 0,
+    "risks_detected": 4
+  },
+  "tool": "qualityforge.risk_report_quality",
+  "version": "1"
+}

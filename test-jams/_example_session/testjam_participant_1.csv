@@ -1,0 +1,68 @@
+Test ID,Category,Test Name,Priority,Type,Component,Objective,Pre-conditions,Test Steps,Expected Results,Status,Tester,Date Tested,Actual Results,Notes,Bug ID
+TC-001,Functional Testing,[org/project] [TXPLAT-3858] SMS Send Success Flow,P0,Manual,SMS API,Verify successful SMS sending through API endpoint,"1. Valid API credentials
+2. SMS plan with available credits
+3. Test phone number","1. Authenticate with valid API credentials
+2. Call /messages/send-sms endpoint with valid payload
+3. Include required parameters: to, from, body
+4. Submit request
+5. Verify response status","1. API returns 200 status code
+2. Response includes message_id
+3. SMS is queued for delivery
+4. Credits are deducted from account",,,,,,
+TC-002,Functional Testing,[org/project] [TXPLAT-3858] SMS Send - Missing Required Fields,P1,Manual,SMS API,Verify proper error handling when required fields are missing,"1. Valid API credentials
+2. SMS plan active","1. Authenticate with valid API credentials
+2. Call /messages/send-sms endpoint
+3. Omit 'to' field from payload
+4. Submit request
+5. Repeat with missing 'from' field
+6. Repeat with missing 'body' field","1. API returns 400 Bad Request
+2. Error message clearly indicates missing field
+3. No credits deducted
+4. No message sent",,,,,,
+TC-003,Security Testing,[org/project] [TXPLAT-3858] SMS API Authentication Validation,P0,Manual,Authentication,Verify API properly validates authentication credentials,"1. Valid and invalid API credentials available","1. Attempt API call without authentication header
+2. Verify 401 Unauthorized response
+3. Attempt API call with invalid API key
+4. Verify 401 Unauthorized response
+5. Use valid credentials
+6. Verify 200 success response","1. Unauthenticated requests rejected with 401
+2. Invalid credentials rejected with 401
+3. Error messages don't leak sensitive info
+4. Valid credentials allow access",,,,,,
+TC-004,Performance Testing,[org/project] [TXPLAT-3858] SMS API Response Time,P2,Manual + Automated,SMS API,Verify API response times meet SLA requirements,"1. SMS plan with credits
+2. Performance testing tools","1. Send 10 SMS API requests sequentially
+2. Measure response time for each
+3. Calculate average response time
+4. Send 5 concurrent requests
+5. Measure concurrent response times","1. Average response time < 500ms
+2. 95th percentile < 1000ms
+3. Concurrent requests handled properly
+4. No timeouts or failures",,,,,,
+TC-005,Regression Testing,[org/project] [TXPLAT-3858] Email Sending Still Works,P1,Manual,Email API,Verify SMS changes didn't break existing email functionality,"1. Valid email API credentials
+2. Email plan active","1. Authenticate with valid credentials
+2. Send test email via /messages/send endpoint
+3. Verify email delivery
+4. Check email rendering
+5. Verify tracking works","1. Email sends successfully
+2. Email renders correctly
+3. Tracking pixels work
+4. No regression in email functionality",,,,,,
+TC-006,Cross-Browser Testing,[org/project] [TXPLAT-3858] SMS Dashboard Display - Chrome,P1,Manual,SMS Dashboard,Verify SMS dashboard displays correctly in Chrome browser,"1. Chrome browser (latest version)
+2. SMS plan active
+3. SMS usage data","1. Open Chrome browser
+2. Navigate to /sms/dashboard
+3. Verify page layout loads correctly
+4. Check SMS usage meter displays
+5. Verify credit information shows
+6. Test responsive behavior","1. Dashboard loads without errors
+2. SMS meter displays accurately
+3. All UI elements properly positioned
+4. Responsive layout works correctly
+5. No console errors",,,,,,
+TC-007,UI/UX Testing,[org/project] [TXPLAT-3858] SMS Credit Warning Display,P2,Manual,SMS Dashboard,Verify warning appears when SMS credits run low,"1. SMS plan with less than 10% credits remaining","1. Navigate to SMS dashboard
+2. Check for low credit warning banner
+3. Verify warning message is clear
+4. Click upgrade/add credits button
+5. Verify proper navigation","1. Warning banner displays prominently
+2. Message clearly indicates low credits
+3. Call-to-action button works
+4. User can easily add more credits",,,,,,
