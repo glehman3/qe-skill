@@ -615,6 +615,26 @@ class AccuracyAnalyzer:
         return out_path
 
 
+def high_severity_test_ids(report: Dict) -> List[str]:
+    """Return unique Test IDs that have at least one high-severity finding.
+
+    Used by the /qforge skill's "high-severity findings remediation" step to
+    drive targeted regeneration of just the flagged rows. Order is preserved
+    so the agent can stream-regenerate in a stable sequence.
+    """
+    seen: set = set()
+    out: List[str] = []
+    for finding in report.get("findings", []) or []:
+        if finding.get("severity") != "high":
+            continue
+        test_id = finding.get("test_id")
+        if not test_id or test_id in seen:
+            continue
+        seen.add(test_id)
+        out.append(test_id)
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="QualityForge Test Jam Accuracy Analyzer (Feature 1)")
     parser.add_argument("--test-jam", required=True, help="Test jam directory name under test-jams/")

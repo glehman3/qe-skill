@@ -17,6 +17,7 @@ from test_jam_accuracy import (  # noqa: E402
     detect_vagueness,
     has_observable_outcome_marker,
     has_terminal_action_verb,
+    high_severity_test_ids,
 )
 
 
@@ -112,6 +113,116 @@ class TestH2BrittleLocatorSyntax(unittest.TestCase):
         self.assertFalse(detect_brittle_locator_syntax("Click the Save button"))
         self.assertFalse(detect_brittle_locator_syntax("Select the first row in the table"))
         self.assertFalse(detect_brittle_locator_syntax("Press Continue on the confirmation dialog"))
+
+
+class TestHighSeverityTestIds(unittest.TestCase):
+    """high_severity_test_ids — deduped, ordered Test IDs for remediation flow."""
+
+    def test_empty_findings_returns_empty_list(self):
+        self.assertEqual(high_severity_test_ids({"findings": []}), [])
+
+    def test_missing_findings_key_returns_empty_list(self):
+        self.assertEqual(high_severity_test_ids({}), [])
+
+    def test_findings_none_returns_empty_list(self):
+        self.assertEqual(high_severity_test_ids({"findings": None}), [])
+
+    def test_no_high_severity_returns_empty_list(self):
+        report = {
+            "findings": [
+                {"severity": "medium", "test_id": "TC-001"},
+                {"severity": "low", "test_id": "TC-002"},
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), [])
+
+    def test_single_high_returns_one_id(self):
+        report = {
+            "findings": [
+                {
+                    "severity": "high",
+                    "test_id": "TC-007",
+                    "field": "expected_results",
+                    "issue": "Missing Expected Results",
+                }
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), ["TC-007"])
+
+    def test_dedupes_repeated_high_for_same_test_id(self):
+        report = {
+            "findings": [
+                {"severity": "high", "test_id": "TC-003", "issue": "Missing Test Steps"},
+                {"severity": "high", "test_id": "TC-003", "issue": "Missing Expected Results"},
+                {"severity": "high", "test_id": "TC-001", "issue": "Missing coverage for AC1"},
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), ["TC-003", "TC-001"])
+
+    def test_preserves_first_occurrence_order(self):
+        report = {
+            "findings": [
+                {"severity": "low", "test_id": "TC-099"},
+                {"severity": "high", "test_id": "TC-010"},
+                {"severity": "medium", "test_id": "TC-020"},
+                {"severity": "high", "test_id": "TC-002"},
+                {"severity": "high", "test_id": "TC-010"},
+                {"severity": "high", "test_id": "TC-001"},
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), ["TC-010", "TC-002", "TC-001"])
+
+    def test_skips_empty_string_test_id(self):
+        report = {
+            "findings": [
+                {"severity": "high", "test_id": ""},
+                {"severity": "high", "test_id": "TC-004"},
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), ["TC-004"])
+
+    def test_whitespace_only_test_id_is_kept(self):
+        """Helper does not strip; non-empty whitespace is a distinct id."""
+        report = {
+            "findings": [
+                {"severity": "high", "test_id": "   "},
+                {"severity": "high", "test_id": "TC-004"},
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), ["   ", "TC-004"])
+
+    def test_includes_jam_level_high_coverage_test_id(self):
+        report = {
+            "findings": [
+                {
+                    "severity": "high",
+                    "test_id": "(test jam)",
+                    "field": "coverage",
+                    "issue": "Missing coverage for AC2",
+                },
+                {"severity": "high", "test_id": "TC-005"},
+            ]
+        }
+        self.assertEqual(high_severity_test_ids(report), ["(test jam)", "TC-005"])
+
+    def test_integration_with_analyze_quick_missing_results(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            jam_dir = repo / "test-jams" / "high_sev_fixture"
+            jam_dir.mkdir(parents=True)
+            (jam_dir / "testjam_all_test_cases.csv").write_text(
+                "Test Case ID,Test Name,Test Steps,Expected Results\n"
+                'TC-A,No results case,"1. Click Save",""\n'
+                'TC-B,OK case,"1. Click Export","1. File download completes"\n',
+                encoding="utf-8",
+            )
+            analyzer = AccuracyAnalyzer(repo_root=repo)
+            report = analyzer.analyze_quick(jam_dir)
+            self.assertEqual(high_severity_test_ids(report), ["TC-A"])
+            highs = [f for f in report["findings"] if f["severity"] == "high"]
+            self.assertEqual(len(highs), 1)
+            self.assertEqual(highs[0]["test_id"], "TC-A")
+            self.assertEqual(highs[0]["issue"], "Missing Expected Results")
 
 
 class TestAnalyzeQuickIntegration(unittest.TestCase):

@@ -1,6 +1,56 @@
 {
-  "ac_coverage": {},
-  "acs": [],
+  "ac_coverage": {
+    "AC1": [
+      "TC-001",
+      "TC-008",
+      "TC-002",
+      "TC-003",
+      "TC-004",
+      "TC-005",
+      "TC-007",
+      "TC-009",
+      "TC-011",
+      "TC-012"
+    ],
+    "AC2": [
+      "TC-007",
+      "TC-008",
+      "TC-001",
+      "TC-002",
+      "TC-004",
+      "TC-012",
+      "TC-013",
+      "TC-003",
+      "TC-005",
+      "TC-006"
+    ],
+    "AC3": [
+      "TC-007",
+      "TC-006",
+      "TC-010",
+      "TC-008",
+      "TC-012",
+      "TC-001",
+      "TC-002",
+      "TC-003",
+      "TC-004",
+      "TC-005"
+    ]
+  },
+  "acs": [
+    {
+      "ac_id": "AC1",
+      "text": "User can view SMS send success flow"
+    },
+    {
+      "ac_id": "AC2",
+      "text": "User can see SMS credits"
+    },
+    {
+      "ac_id": "AC3",
+      "text": "User can navigate SMS dashboard"
+    }
+  ],
   "counts": {
     "ac_coverage_gaps": 0,
     "findings_total": 17,
@@ -130,8 +180,8 @@
       "test_id": "TC-014"
     }
   ],
-  "generated_at_utc": "2026-05-28T20:50:20.369912+00:00",
+  "generated_at_utc": "2026-02-12T20:49:59.801293+00:00",
   "mode": "quick",
   "read_warnings": [],
-  "test_jam_dir": "/Users/wjia/Projects/qe-suite/test-jams/_example_session"
+  "test_jam_dir": "/Users/glehman/cursor-rules/test-jams/_example_session"
 }
