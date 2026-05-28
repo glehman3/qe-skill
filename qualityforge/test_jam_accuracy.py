@@ -2,6 +2,9 @@
 """
 QualityForge - Test Jam Accuracy Analyzer (Feature 1 - Accuracy Pass)
 
+Conceptual prior art: terminal-action / observable-outcome pairing heuristics
+inspired by playwrighter-style test-case linting (clean-room; no code copied).
+
 Purpose:
   Generate a machine-readable content-quality report for a test jam's CSV test cases.
 
@@ -29,8 +32,8 @@ import csv
 import json
 import re
 from dataclasses import dataclass
-from utils import now_utc_iso
 from pathlib import Path
+from utils import now_utc_iso
 from typing import Dict, List, Optional, Tuple
 
 
@@ -63,6 +66,87 @@ VAGUE_VERBS = [
     "validate",
 ]
 
+TERMINAL_ACTION_VERBS = (
+    "click",
+    "submit",
+    "send",
+    "tap",
+    "press",
+    "select",
+    "enter",
+    "navigate",
+    "upload",
+    "delete",
+    "save",
+    "confirm",
+    "drag",
+    "toggle",
+    "enable",
+    "disable",
+)
+
+TERMINAL_ACTION_RE = re.compile(
+    r"\b(" + "|".join(re.escape(v) for v in TERMINAL_ACTION_VERBS) + r")\b",
+    re.IGNORECASE,
+)
+
+OBSERVABLE_OUTCOME_MARKERS = [
+    "displays",
+    "shows",
+    "appears",
+    "visible",
+    "navigates to",
+    "redirected",
+    "receives",
+    "updated",
+    "decrements",
+    "increments",
+    "created",
+    "deleted",
+    "removed",
+    "changes to",
+    "error message",
+    "confirmation",
+    "notification",
+    "toast",
+    "modal",
+    "banner",
+    "status",
+    "returns",
+    "response",
+    "status code",
+    "exit code",
+    "output",
+    "completes",
+    "file contains",
+    "log shows",
+    "record created",
+    "queue depth",
+    "produces",
+    "generates",
+    "emits",
+]
+
+BRITTLE_LOCATOR_PATTERNS = [
+    re.compile(r"xpath\s*=", re.IGNORECASE),
+    re.compile(r"nth-child\s*\(", re.IGNORECASE),
+    re.compile(r"\bcss\s*=", re.IGNORECASE),
+    re.compile(r"\.css-", re.IGNORECASE),
+    re.compile(r"\[class\s*=", re.IGNORECASE),
+    re.compile(r"//div\b", re.IGNORECASE),
+    re.compile(r"//span\b", re.IGNORECASE),
+]
+
+DATA_TESTID_SOLE_RE = re.compile(r"^\s*data-testid\s*=\s*[\w.-]+\s*$", re.IGNORECASE)
+
+# "Enter email in field" / "Enter valid phone number" — data entry, not a terminal action.
+ENTER_DATA_ENTRY_RE = re.compile(
+    r"\benter\s+(?:the\s+)?[\w\s'.-]{0,80}?\b(?:"
+    r"field|box|input|inputs|value|values|data|email|emails|phone|phones|number|numbers|"
+    r"password|passwords|address|addresses|name|names|code|codes|message|messages|text|texts"
+    r")\b",
+    re.IGNORECASE,
+)
 
 
 def tokenize(text: str) -> List[str]:
@@ -100,6 +184,94 @@ def detect_vagueness(text: str) -> bool:
         if re.search(pat, t, re.IGNORECASE):
             return True
     return False
+
+
+def _last_numbered_or_trailing_line(text: str, items: List[str]) -> str:
+    if items:
+        return items[-1]
+    lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
+    return lines[-1] if lines else ""
+
+
+def has_terminal_action_verb(step: str) -> bool:
+    s = step or ""
+    if ENTER_DATA_ENTRY_RE.search(s):
+        return False
+    return bool(TERMINAL_ACTION_RE.search(s))
+
+
+def has_observable_outcome_marker(text: str) -> bool:
+    t = (text or "").lower()
+    return any(marker in t for marker in OBSERVABLE_OUTCOME_MARKERS)
+
+
+def expected_lacks_observable_outcome(expected: str) -> bool:
+    if not (expected or "").strip():
+        return True
+    if detect_vagueness(expected):
+        return True
+    return not has_observable_outcome_marker(expected)
+
+
+def _expected_for_terminal_step(
+    step_items: List[str],
+    result_items: List[str],
+    test_steps: str,
+    expected_results: str,
+) -> str:
+    """
+    Expected-result line paired with the final step for H1.
+
+    - Equal counts: last step ↔ last expected (index N).
+    - Fewer results than steps: last expected line (covers trailing terminal actions).
+    - More results than steps: expected at the last step's index (not the final extra lines).
+    """
+    if not result_items:
+        return ""
+    if step_items:
+        if len(step_items) == len(result_items):
+            return result_items[-1]
+        if len(result_items) < len(step_items):
+            return result_items[-1]
+        return result_items[len(step_items) - 1]
+    return _last_numbered_or_trailing_line(expected_results, result_items)
+
+
+def detect_terminal_action_without_outcome(test_steps: str, expected_results: str) -> bool:
+    """
+    H1: Final step is a terminal action but its paired expected outcome is empty,
+    vague, or not observable.
+
+    Skipped when Expected Results is blank (missing-results finding covers that).
+    Pairing rules: see _expected_for_terminal_step.
+    """
+    if not (expected_results or "").strip():
+        return False
+
+    step_items = extract_numbered_items(test_steps)
+    result_items = extract_numbered_items(expected_results)
+    if not result_items:
+        return False
+
+    last_step = _last_numbered_or_trailing_line(test_steps, step_items)
+    if not last_step or not has_terminal_action_verb(last_step):
+        return False
+
+    paired_expected = _expected_for_terminal_step(
+        step_items, result_items, test_steps, expected_results
+    )
+    return expected_lacks_observable_outcome(paired_expected)
+
+
+def detect_brittle_locator_syntax(step: str) -> bool:
+    """
+    H2: Step embeds brittle locator syntax (xpath/css/nth-child/etc.).
+    Plain-English UI references (e.g. 'Click the Save button') are not flagged.
+    """
+    s = step or ""
+    if DATA_TESTID_SOLE_RE.match(s):
+        return True
+    return any(pat.search(s) for pat in BRITTLE_LOCATOR_PATTERNS)
 
 
 def has_concrete_noun_phrase(step: str) -> bool:
@@ -303,6 +475,36 @@ class AccuracyAnalyzer:
                     )
                     break
 
+            if (results or "").strip() and detect_terminal_action_without_outcome(steps, results):
+                findings.append(
+                    Finding(
+                        severity="medium",
+                        test_id=test_id,
+                        field="expected_results",
+                        issue="Last step is a terminal action without a verifiable expected outcome",
+                        suggestion=(
+                            "Add an observable expected result for the final action "
+                            "(UI change, message text, URL, status code, data change, etc.)."
+                        ),
+                    )
+                )
+
+            for item in step_items:
+                if detect_brittle_locator_syntax(item):
+                    findings.append(
+                        Finding(
+                            severity="low",
+                            test_id=test_id,
+                            field="test_steps",
+                            issue="Brittle locator syntax in test step",
+                            suggestion=(
+                                "Describe the target in human-readable terms (button label, role, visible text) "
+                                "instead of xpath/css/nth-child/data-testid-only selectors."
+                            ),
+                        )
+                    )
+                    break
+
             # Light consistency: auth hint mismatch
             if "logged out" in pre.lower() and "login" not in steps.lower() and "sign in" not in steps.lower():
                 # This is a weak heuristic; mark low.
@@ -413,38 +615,14 @@ class AccuracyAnalyzer:
         return out_path
 
 
-def high_severity_test_ids(report: Dict) -> List[str]:
-    """Return unique Test IDs that have at least one high-severity finding.
-
-    Used by the /qforge skill's "high-severity findings remediation" step to
-    drive targeted regeneration of just the flagged rows. Order is preserved
-    so the agent can stream-regenerate in a stable sequence.
-    """
-    seen: set = set()
-    out: List[str] = []
-    for finding in report.get("findings", []) or []:
-        if finding.get("severity") != "high":
-            continue
-        test_id = finding.get("test_id")
-        if not test_id or test_id in seen:
-            continue
-        seen.add(test_id)
-        out.append(test_id)
-    return out
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="QualityForge Test Jam Accuracy Analyzer (Feature 1)")
     parser.add_argument("--test-jam", required=True, help="Test jam directory name under test-jams/")
     parser.add_argument(
         "--mode",
-        choices=["quick"],
+        choices=["quick", "thorough"],
         default="quick",
-        help=(
-            "Accuracy pass mode. Only 'quick' is supported by this CLI; "
-            "the deeper 'Thorough' pass is orchestrated by /qforge at the skill layer "
-            "(Quick heuristics + agent-driven semantic analysis)."
-        ),
+        help="Accuracy pass mode (quick is fast heuristics; thorough is future expansion)",
     )
     parser.add_argument(
         "--acs-file",
@@ -472,6 +650,10 @@ def main() -> None:
         acs_text = args.acs_text
 
     acs = parse_acs_text(acs_text) if acs_text.strip() else None
+
+    if args.mode != "quick":
+        # for future: keep interface stable.
+        print("ℹ️  Thorough mode not implemented yet. Running quick mode instead.")
 
     report = analyzer.analyze_quick(test_jam_dir=test_jam_dir, acs=acs)
     out_path = analyzer.write_report(test_jam_dir, report)
