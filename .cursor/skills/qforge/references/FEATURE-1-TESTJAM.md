@@ -1030,7 +1030,7 @@ Choose accuracy level:
 What this checks:
 - AC Coverage: do tests map to the Acceptance Criteria you provided?
 - Completeness: pre-conditions / steps / expected results are present and verifiable
-- Consistency: steps and expected results don't contradict pre-conditions
+- Light consistency (quick mode): logged-out pre-conditions without login/sign-in steps in the test
 
 Running checks now...
 ```

@@ -183,5 +183,5 @@
   "generated_at_utc": "2026-02-12T20:49:59.801293+00:00",
   "mode": "quick",
   "read_warnings": [],
-  "test_jam_dir": "~/qe-suite/test-jams/_example_session"
+  "test_jam_dir": "/Users/glehman/cursor-rules/test-jams/_example_session"
 }
